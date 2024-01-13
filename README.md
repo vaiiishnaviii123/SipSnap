@@ -35,7 +35,7 @@ Dart plugin fo Vs code: [Dart plugin](https://marketplace.visualstudio.com/items
 
 
 ```bash 
-    git clone https://github.com/your-username/your-repository.git
+    git clone https://github.com/vaiiishnaviii123/SipSnap.git
 ```
 
 ```bash 
