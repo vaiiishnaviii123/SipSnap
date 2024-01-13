@@ -6,18 +6,17 @@ SipSnap is a revolutionary mobile application dedicated to bringing together bob
 
 
 ## Tech Stack
-
 <div style="display: flex; justify-content: space-around; align-items: center;">
 
-  <img src="https://img.icons8.com/color/48/000000/flutter.png" alt="Flutter" title="Flutter">
+  ![Flutter](https://img.shields.io/badge/Flutter-%2302569B?style=for-the-badge&logo=flutter&logoColor=white)
   
-  <img src="https://img.icons8.com/color/48/000000/dart.png" alt="Dart" title="Dart">
+  ![Dart](https://img.shields.io/badge/Dart-%230175C2?style=for-the-badge&logo=dart&logoColor=white)
   
-  <img src="https://img.icons8.com/color/48/000000/android-os.png" alt="Android" title="Android">
+  ![Android](https://img.shields.io/badge/Android-%233DDC84?style=for-the-badge&logo=android&logoColor=white)
   
-  <img src="https://img.icons8.com/color/48/000000/ios-logo.png" alt="iOS" title="iOS">
+  ![iOS](https://img.shields.io/badge/iOS-%231575F9?style=for-the-badge&logo=apple&logoColor=white)
   
-  <img src="https://img.icons8.com/color/48/000000/firebase.png" alt="Firebase" title="Firebase">
+  ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
   
 </div>
 
