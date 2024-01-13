@@ -10,8 +10,7 @@ SipSnap is a revolutionary mobile application dedicated to bringing together bob
 
 ## Development Environment
 
-- [Android Studio](https://developer.android.com/studio)
-  ![Android Studio](https://img.shields.io/badge/Android%20Studio-%233DDC84?style=for-the-badge&logo=android-studio&logoColor=white)
+- [![Android Studio](https://img.shields.io/badge/Android%20Studio-%233DDC84?style=for-the-badge&logo=android-studio&logoColor=white)](https://developer.android.com/studio)
 
 - [Visual Studio Code](https://code.visualstudio.com/)
   ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
