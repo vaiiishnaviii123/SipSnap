@@ -8,13 +8,16 @@ SipSnap is a revolutionary mobile application dedicated to bringing together bob
 | ![Flutter](https://img.shields.io/badge/Flutter-%2302569B?style=for-the-badge&logo=flutter&logoColor=white) | ![Dart](https://img.shields.io/badge/Dart-%230175C2?style=for-the-badge&logo=dart&logoColor=white) | ![Android](https://img.shields.io/badge/Android-%233DDC84?style=for-the-badge&logo=android&logoColor=white) | ![iOS](https://img.shields.io/badge/iOS-%231575F9?style=for-the-badge&logo=apple&logoColor=white) | ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black) |
 | :------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
 
-
 ## Development Environment
 
-| [Android Studio](https://developer.android.com/studio) ![Android Studio](https://img.shields.io/badge/Android%20Studio-%233DDC84?style=for-the-badge&logo=android-studio&logoColor=white) | [Visual Studio Code](https://code.visualstudio.com/) ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white) | [Firebase](https://firebase.google.com/) ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black) |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
+- [Android Studio](https://developer.android.com/studio)
+  ![Android Studio](https://img.shields.io/badge/Android%20Studio-%233DDC84?style=for-the-badge&logo=android-studio&logoColor=white)
 
+- [Visual Studio Code](https://code.visualstudio.com/)
+  ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
+- [Firebase](https://firebase.google.com/)
+  ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 
 ## Table of Contents
 
