@@ -11,14 +11,9 @@ SipSnap is a revolutionary mobile application dedicated to bringing together bob
 
 ## Development Environment
 
-- [Android Studio](https://developer.android.com/studio)
-  ![Android Studio](https://img.icons8.com/color/48/000000/android-studio.png)
+| [Android Studio](https://developer.android.com/studio) ![Android Studio](https://img.shields.io/badge/Android%20Studio-%233DDC84?style=for-the-badge&logo=android-studio&logoColor=white) | [Visual Studio Code](https://code.visualstudio.com/) ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white) | [Firebase](https://firebase.google.com/) ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black) |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-  ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-
-- [Firebase](https://firebase.google.com/)
-  ![Firebase](https://img.icons8.com/color/48/000000/firebase.png)
 
 
 ## Table of Contents
