@@ -3,22 +3,11 @@
 ## Description
 SipSnap is a revolutionary mobile application dedicated to bringing together boba enthusiasts from around the world. This vibrant community platform offers a space for users to share their favorite boba recipes, discover exciting events, exchange suggestions, and easily locate nearby boba cafes.
 
-
-
 ## Tech Stack
-<div style="display: flex; justify-content: space-around; align-items: center;">
 
-  ![Flutter](https://img.shields.io/badge/Flutter-%2302569B?style=for-the-badge&logo=flutter&logoColor=white)
-  
-  ![Dart](https://img.shields.io/badge/Dart-%230175C2?style=for-the-badge&logo=dart&logoColor=white)
-  
-  ![Android](https://img.shields.io/badge/Android-%233DDC84?style=for-the-badge&logo=android&logoColor=white)
-  
-  ![iOS](https://img.shields.io/badge/iOS-%231575F9?style=for-the-badge&logo=apple&logoColor=white)
-  
-  ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
-  
-</div>
+| ![Flutter](https://img.shields.io/badge/Flutter-%2302569B?style=for-the-badge&logo=flutter&logoColor=white) | ![Dart](https://img.shields.io/badge/Dart-%230175C2?style=for-the-badge&logo=dart&logoColor=white) | ![Android](https://img.shields.io/badge/Android-%233DDC84?style=for-the-badge&logo=android&logoColor=white) | ![iOS](https://img.shields.io/badge/iOS-%231575F9?style=for-the-badge&logo=apple&logoColor=white) | ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=for-the-badge&logo=firebase&logoColor=black) |
+| :------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
+
 
 ## Development Environment
 
