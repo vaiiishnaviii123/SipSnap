@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'community_posts.dart';
-import 'recipe.dart';
-import 'boba_recorder.dart';
+import 'community_views/community_posts_view.dart';
+import 'recipe_views/recipe_posts_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,12 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: PageView(
                 controller: _pageController,
                 children: const [
-                  BobaRecorder(),
                   CommunityPosts(),
                   Recipe(),
                 ],
                 onPageChanged: (index) {
-                  print("Page changed to index: $index");
                   setState(() {
                     _currentIndex = index;
                   });
@@ -46,10 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_cafe),
-            label: 'Boba',
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.group),
             label: 'Community Posts',

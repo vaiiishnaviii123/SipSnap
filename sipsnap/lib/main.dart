@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+import 'view/home_screen.dart';
 
 void main() {
   runApp(
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Boba App',
+      title: 'Sip Snap',
       theme: ThemeData(),
       home: const HomeScreen(),
     );
