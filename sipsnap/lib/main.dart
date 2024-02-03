@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'view/home_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'view/login-register/login_page.dart';
+import 'view/login-register/register_page.dart';
 
 void main() {
   // this displays the splash screen for a few seconds before the app starts
@@ -27,15 +29,14 @@ class MyApp extends StatelessWidget {
           
           // Return your MaterialApp with the desired configuration
           return MaterialApp(
-            // initialRoute: '/',
-            // routes: {
-            //   '/': (context) => const LoginPage(),
-            //   '/home': (context) => const HomeScreen(),
-
-            // },
+            initialRoute: '/',
+            routes: {
+              '/': (context) => const LoginPage(),
+              '/home': (context) => const HomeScreen(),
+              '/register': (context) => const RegisterPage(),
+            },
             title: 'Sip Snap',
-            theme: ThemeData(),
-            home: const HomeScreen(),
+            theme: ThemeData() 
           );
         } else {
           // Return a placeholder or loading screen if needed
