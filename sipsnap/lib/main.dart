@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sipsnap/providers/community_posts_provider.dart';
+import 'package:sipsnap/providers/recipe_posts_provider.dart';
 import 'view/home_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'view/login-register/login_page.dart';
@@ -12,8 +13,15 @@ void main() {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CommunityPostsProvider(), // Initialize the Provider
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CommunityPostsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RecipePostsProvider(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );

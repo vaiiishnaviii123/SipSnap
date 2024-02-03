@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _pageController,
                 children: const [
                   CommunityPosts(),
-                  Recipe(),
+                  RecipePosts(),
                 ],
                 onPageChanged: (index) {
                   setState(() {
