@@ -27,6 +27,12 @@ class MyApp extends StatelessWidget {
           
           // Return your MaterialApp with the desired configuration
           return MaterialApp(
+            // initialRoute: '/',
+            // routes: {
+            //   '/': (context) => const LoginPage(),
+            //   '/home': (context) => const HomeScreen(),
+
+            // },
             title: 'Sip Snap',
             theme: ThemeData(),
             home: const HomeScreen(),
