@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sipsnap/data_classes/community_posts_model.dart';
-import 'package:sipsnap/providers/community_posts_provider.dart';
+import 'package:sipsnap/models/community_posts_model.dart';
+import 'package:sipsnap/view_model/community_posts_provider.dart';
 
 class CommunityPosts extends StatelessWidget {
   const CommunityPosts({Key? key}) : super(key: key);

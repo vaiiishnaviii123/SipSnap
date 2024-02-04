@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sipsnap/providers/community_posts_provider.dart';
+import 'package:sipsnap/view_model/community_posts_provider.dart';
+import 'package:sipsnap/view/create_post/create_community_recipe_post.dart';
 import 'view/home_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'view/login-register/login_page.dart';
-import 'view/login-register/register_page.dart';
+import 'view/login_register/login_page.dart';
+import 'view/login_register/register_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {

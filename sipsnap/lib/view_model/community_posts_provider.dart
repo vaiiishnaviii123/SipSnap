@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sipsnap/data_classes/community_posts_model.dart';
+import 'package:sipsnap/models/community_posts_model.dart';
 
 class CommunityPostsProvider extends ChangeNotifier {
   final List<CommunityPost> _communityPosts = [
