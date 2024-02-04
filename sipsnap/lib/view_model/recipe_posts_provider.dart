@@ -1,6 +1,6 @@
 // recipe_posts_provider.dart
 import 'package:flutter/material.dart';
-import 'package:sipsnap/data_classes/recipe_posts_model.dart';
+import 'package:sipsnap/models/recipe_posts_model.dart';
 
 class RecipePostsProvider extends ChangeNotifier {
   final List<RecipePost> _recipePosts = [

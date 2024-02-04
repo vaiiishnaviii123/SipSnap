@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sipsnap/data_classes/recipe_posts_model.dart';
-import 'package:sipsnap/providers/recipe_posts_provider.dart';
+import 'package:sipsnap/models/recipe_posts_model.dart';
+import 'package:sipsnap/view_model/recipe_posts_provider.dart';
 
 class RecipePosts extends StatelessWidget {
   const RecipePosts({Key? key}) : super(key: key);
