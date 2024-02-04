@@ -84,6 +84,15 @@ class _LoginPageState extends State<LoginPage> {
                         ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+                              
+                              // check if the email is email 
+                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(emailController.text)) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Please enter a valid email')),
+                                );
+                                return;
+                              }
+
                               if (emailController.text == _email && passwordController.text == _password) {
                                 Navigator.pushNamed(context, '/home');
                               } else {
