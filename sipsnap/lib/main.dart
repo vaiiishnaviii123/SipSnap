@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sipsnap/providers/community_posts_provider.dart';
+import 'package:sipsnap/view_model/register_page_provider.dart';
 import 'package:sipsnap/providers/recipe_posts_provider.dart';
 import 'view/home_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -15,12 +16,13 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => CommunityPostsProvider(),
-        ),
+        // Add your providers here
+        ChangeNotifierProvider(create: (_) => CommunityPostsProvider()),
+        ChangeNotifierProvider(create: (_) => RegisterPageProvider()),
         ChangeNotifierProvider(
           create: (context) => RecipePostsProvider(),
         ),
+        // Add more providers if needed
       ],
       child: const MyApp(),
     ),
