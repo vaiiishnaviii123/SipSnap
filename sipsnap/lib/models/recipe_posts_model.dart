@@ -1,12 +1,12 @@
 class RecipePost {
   final String recipeTitle;
-  final String chefName;
+  final String userName;
   final String description;
   final String imagePath;
 
   RecipePost({
     required this.recipeTitle,
-    required this.chefName,
+    required this.userName,
     required this.description,
     required this.imagePath,
   });

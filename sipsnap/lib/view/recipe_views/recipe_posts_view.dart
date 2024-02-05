@@ -64,7 +64,7 @@ class _RecipePostCardState extends State<RecipePostCard> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 // Chef's name
-                Text(widget.post.chefName),
+                Text(widget.post.userName),
                 // Likes button and comments section
                 Row(
                   children: [
