@@ -55,9 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(201, 215, 221, 1), //255,243,207
+        //backgroundColor: Color.fromRGBO(255,243,207, 1), // 201, 215, 221
       appBar: AppBar(
-        title: const Text('Sip Snap'),
+        title: const Text('Sip Snap', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromRGBO(99,122,159, 1),
       ),
       body: Column(
         children: [
@@ -86,6 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromRGBO(99,122,159, 1),
+        selectedItemColor: Colors.greenAccent,
+        unselectedItemColor: Colors.white,
         currentIndex: _currentIndex,
         items: const [
           BottomNavigationBarItem(
