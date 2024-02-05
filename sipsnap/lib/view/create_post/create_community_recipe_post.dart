@@ -38,10 +38,10 @@ class _CreatePostState extends State<CreatePost> {
       RecipePost recipePost = RecipePost(
         imagePath: 'assets/spaceneedle.jpg',
         recipeTitle: titleController.text,
-        chefName: 'admin',
+        userName: 'admin',
         description: descriptionController.text,
       );
-      context.read<RecipePostsProvider>().addSampleRecipePost(recipePost);
+      context.read<RecipePostsProvider>().addRecipePost(recipePost);
       message = "Recipe posted successfully!";
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
