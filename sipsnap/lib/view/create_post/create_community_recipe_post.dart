@@ -22,7 +22,7 @@ class _CreatePostState extends State<CreatePost> {
   final TextEditingController dropdownController = TextEditingController();
   bool _isRecipe = false;
   bool _isCommunityPost = false;
-  String message = "";
+  String message = "Community event Title";
   List<String> list = <String>['Community Post', 'Recipe Post'];
   String dropdownValue = "";
 
@@ -45,7 +45,8 @@ class _CreatePostState extends State<CreatePost> {
       message = "Recipe posted successfully!";
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Recipe posted successfully!"),
+          content: Text("Recipe posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
+          backgroundColor: Color.fromRGBO(232,200,114, 1),
         ),
       );
     }else{
@@ -59,7 +60,8 @@ class _CreatePostState extends State<CreatePost> {
       message = "Event posted successfully!";
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Event posted successfully!"),
+          content: Text("Event posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
+          backgroundColor: Color.fromRGBO(232,200,114, 1),
         ),
       );
     }
@@ -73,8 +75,9 @@ class _CreatePostState extends State<CreatePost> {
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
-        child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        child: Wrap(
+        //crossAxisAlignment: CrossAxisAlignment.start,
+          runSpacing:7,
         children: [
           Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,9 +91,11 @@ class _CreatePostState extends State<CreatePost> {
                 setState(() {
                       dropdownValue = value!;
                       if(dropdownValue == "Community Post"){
+                        message = "Community event Title";
                         _isCommunityPost = true;
                         _isRecipe = false;
                       }else{
+                        message = "Recipe Title";
                         _isRecipe = true;
                         _isCommunityPost = false;
                       }
@@ -137,14 +142,14 @@ class _CreatePostState extends State<CreatePost> {
       //     }).toList(),
       //   ),
       //     ),
-          if(_isRecipe)Center(child: const Text("Recipe Post.", style: TextStyle(color: Colors.black54, fontSize: 35))),
-          if(_isCommunityPost)Center(child: const Text("Event Post.", style: TextStyle(color: Colors.black54, fontSize: 35))),
+          if(_isRecipe)Center(child: const Text("Recipe Post.", style: TextStyle(color:  Color.fromRGBO(99,122,159, 1), fontSize: 35))),
+          if(_isCommunityPost)Center(child: const Text("Event Post.", style: TextStyle(color:  Color.fromRGBO(99,122,159, 1), fontSize: 35))),
           //const Text("Title:", style: TextStyle(color: Colors.black54, fontSize: 25)),
           TextFormField(
             key: Key("Title."),
             controller: titleController,
             decoration: InputDecoration(
-             labelText: "Post Title",
+             labelText: message,
             ),
             // The validator receives the text that the user has entered.
             validator: (value) {
@@ -168,8 +173,10 @@ class _CreatePostState extends State<CreatePost> {
           TextFormField(
             key: Key("Description."),
             controller: descriptionController,
+            maxLines: 3,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
+              alignLabelWithHint: true,
               labelText: "Enter description here."
             ),
             // The validator receives the text that the user has entered.
@@ -182,6 +189,11 @@ class _CreatePostState extends State<CreatePost> {
           ),
           Center(
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(200, 50),
+                backgroundColor: Color.fromRGBO(99,122,159, 1),
+                foregroundColor: Colors.white,
+              ),
               key: Key("SaveButton"),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
