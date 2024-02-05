@@ -6,8 +6,8 @@ class RecipePostsProvider extends ChangeNotifier {
   final List<RecipePost> _recipePosts = [
     RecipePost(
         recipeTitle: 'Delicious Boba Pearls',
-        chefName: 'David',
-        description: "Try golden pearl boba its amazing",
+        chefName: 'admin',
+        description: "Follow the steps to make this amazing boba.",
         imagePath: 'assets/boba2.jpg'),
   ];
 
