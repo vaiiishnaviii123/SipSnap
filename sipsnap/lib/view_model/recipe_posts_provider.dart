@@ -6,14 +6,14 @@ class RecipePostsProvider extends ChangeNotifier {
   final List<RecipePost> _recipePosts = [
     RecipePost(
         recipeTitle: 'Delicious Boba Pearls',
-        chefName: 'David',
-        description: "Try golden pearl boba its amazing",
+        userName: 'admin',
+        description: "Follow the steps to make this amazing boba.",
         imagePath: 'assets/boba2.jpg'),
   ];
 
   List<RecipePost> get recipePosts => _recipePosts;
 
-  void addSampleRecipePost(RecipePost post) {
+  void addRecipePost(RecipePost post) {
     _recipePosts.add(post);
     notifyListeners();
   }

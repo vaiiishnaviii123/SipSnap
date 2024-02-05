@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sipsnap/view/create_post/create_community_recipe_post.dart';
+import 'package:sipsnap/view/dialog_box.dart';
 import 'community_views/community_posts_view.dart';
 import 'recipe_views/recipe_posts_view.dart';
 
@@ -24,7 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).pop(); // Close the AlertDialog
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreatePost(),
+                    ),
+                  );
                   // Navigate to post form with Community type
                 },
                 child: const Text('Community Post'),
@@ -45,19 +53,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      home: Scaffold(
+        //backgroundColor: Color.fromRGBO(255,243,207, 1), // 201, 215, 221
       appBar: AppBar(
-        title: const Text('Sip Snap'),
+        title: const Text('Sip Snap', style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromRGBO(99,122,159, 1),
       ),
       body: Column(
         children: [
           Expanded(
             child: Container(
-              color: const Color.fromARGB(255, 150, 196, 226),
               child: PageView(
                 controller: _pageController,
                 children: const [
                   CommunityPosts(),
+                  SizedBox(
+                    child: Padding(
+                        padding: EdgeInsets.all(15.0),
+                      child: CreatePost(),
+                    ),
+                  ),
                   RecipePosts(),
                 ],
                 onPageChanged: (index) {
@@ -71,11 +87,18 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromRGBO(99,122,159, 1),
+        selectedItemColor: Colors.greenAccent,
+        unselectedItemColor: Colors.white,
         currentIndex: _currentIndex,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.group),
             label: 'Community Posts',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Post',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.restaurant_menu),
@@ -93,11 +116,12 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showPostTypeDialog,
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _showPostTypeDialog,
+      //   child: Icon(Icons.add),
+      // ),
+    ),
     );
   }
 }
