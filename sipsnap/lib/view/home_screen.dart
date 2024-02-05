@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sipsnap/view/create_post/create_community_recipe_post.dart';
-import 'package:sipsnap/view/dialog_box.dart';
 import 'community_views/community_posts_view.dart';
 import 'recipe_views/recipe_posts_view.dart';
 

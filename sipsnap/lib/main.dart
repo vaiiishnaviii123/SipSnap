@@ -13,20 +13,7 @@ void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  runApp(
-    MultiProvider(
-      providers: [
-        // Add your providers here
-        ChangeNotifierProvider(create: (_) => CommunityPostsProvider()),
-        ChangeNotifierProvider(create: (_) => RegisterPageProvider()),
-        ChangeNotifierProvider(
-          create: (context) => RecipePostsProvider(),
-        ),
-        // Add more providers if needed
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,33 +22,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Wrap your MaterialApp with a FutureBuilder to handle the delay
-    return FutureBuilder(
-      future: Future.delayed(
-          const Duration(seconds: 3)), // Adjust the duration as needed
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          // Remove the splash screen here
-          FlutterNativeSplash.remove();
+    return MultiProvider(
+      providers: [
+      ChangeNotifierProvider(create: (context) => RegisterPageProvider()),
+      ChangeNotifierProvider(create: (context) => CommunityPostsProvider()),
+      ChangeNotifierProvider(create: (context) => RecipePostsProvider()),
+      ], 
+      child:FutureBuilder(
+        future: Future.delayed(
+            const Duration(seconds: 3)), // Adjust the duration as needed
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // Remove the splash screen here
+            FlutterNativeSplash.remove();
 
-          // Return your MaterialApp with the desired configuration
-          return MaterialApp(
-              initialRoute: '/',
-              routes: {
-                '/': (context) => const LoginPage(),
-                '/home': (context) => const HomeScreen(),
-                '/register': (context) => const RegisterPage(),
-              },
-              title: 'Sip Snap',
-              theme: ThemeData());
-        } else {
-          // Return a placeholder or loading screen if needed
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-      },
+            // Return your MaterialApp with the desired configuration
+            return MaterialApp(
+                initialRoute: '/',
+                routes: {
+                  '/': (context) => const LoginPage(),
+                  '/home': (context) => const HomeScreen(),
+                  '/register': (context) => const RegisterPage(),
+                },
+                title: 'Sip Snap',
+                theme: ThemeData());
+          } else {
+            // Return a placeholder or loading screen if needed
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      )
     );
   }
 }
