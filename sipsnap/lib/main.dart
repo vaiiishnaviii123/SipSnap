@@ -19,9 +19,7 @@ void main() {
         // Add your providers here
         ChangeNotifierProvider(create: (_) => CommunityPostsProvider()),
         ChangeNotifierProvider(create: (_) => RegisterPageProvider()),
-        ChangeNotifierProvider(
-          create: (context) => RecipePostsProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => RecipePostsProvider()),
         // Add more providers if needed
       ],
       child: const MyApp(),
