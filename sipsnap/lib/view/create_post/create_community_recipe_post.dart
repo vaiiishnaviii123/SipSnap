@@ -17,11 +17,11 @@ class CreatePost extends StatefulWidget {
 
 class _CreatePostState extends State<CreatePost> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController recipeDescriptionController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController communityDescriptionController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   bool _isRecipe = false;
   bool _isCommunityPost = false;
+  String message = "";
 
   @override
   void initState() {
@@ -36,18 +36,32 @@ class _CreatePostState extends State<CreatePost> {
         imagePath: 'assets/spaceneedle.jpg',
         recipeTitle: titleController.text,
         chefName: 'admin',
-        description: recipeDescriptionController.text,
+        description: descriptionController.text,
       );
       context.read<RecipePostsProvider>().addSampleRecipePost(recipePost);
+      message = "Recipe posted successfully!";
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Recipe posted successfully!"),
+        ),
+      );
     }else{
       CommunityPost communityPost = new CommunityPost(
         imagePath: 'assets/spaceneedle.jpg',
         postTitle: titleController.text,
         username: 'admin',
-        description: communityDescriptionController.text,
+        description: descriptionController.text,
       );
       context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
+      message = "Event posted successfully!";
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Event posted successfully!"),
+        ),
+      );
     }
+    titleController.clear();
+    descriptionController.clear();
   }
 
   @override
@@ -76,7 +90,7 @@ class _CreatePostState extends State<CreatePost> {
               return null;
             },
           ),
-          const Text("Add Picture.", style: TextStyle(color: Colors.black54, fontSize: 25)),
+          const Text("Add Picture.", style: TextStyle(color: Colors.black54, fontSize: 20)),
           Center(
               child: Container(
               height: 200.0, // Adjust the height as needed
@@ -85,30 +99,14 @@ class _CreatePostState extends State<CreatePost> {
               child: Image.asset('assets/spaceneedle.jpg', fit: BoxFit.cover)
             )
           ),
-          if(_isRecipe)const Text("Ingredients.", style: TextStyle(color: Colors.black54, fontSize: 25)),
-          if(_isRecipe)TextFormField(
-            key: Key("Ingredients."),
-            controller: recipeDescriptionController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                gapPadding: 10.0,
-              ),
-              labelText: 'Recomended: Specify ingredient quantity.',
-            ),
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter the ingredients.';
-              }
-              return null;
-            },
-          ),
-          if(_isCommunityPost)const Text("Description.", style: TextStyle(color: Colors.black54, fontSize: 25)),
-          if(_isCommunityPost)TextFormField(
+          if(_isRecipe)const Text("Ingredients and Method.", style: TextStyle(color: Colors.black54, fontSize: 20)),
+          if(_isCommunityPost)const Text("Description.", style: TextStyle(color: Colors.black54, fontSize: 20)),
+          TextFormField(
             key: Key("Description."),
-            controller: communityDescriptionController,
+            controller: descriptionController,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
+              labelText: "Enter description here."
             ),
             // The validator receives the text that the user has entered.
             validator: (value) {
@@ -134,7 +132,7 @@ class _CreatePostState extends State<CreatePost> {
           ),
         ],
         ),
-      ),
+    ),
     );
   }
 }
