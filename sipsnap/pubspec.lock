@@ -121,6 +121,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.1"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -134,7 +142,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
-<<<<<<< Updated upstream
   flutter_native_splash:
     dependency: "direct main"
     description:
@@ -143,7 +150,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.10"
-=======
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -152,7 +158,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
->>>>>>> Stashed changes
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -163,7 +168,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< Updated upstream
   html:
     dependency: transitive
     description:
@@ -188,8 +192,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
-=======
->>>>>>> Stashed changes
   lints:
     dependency: transitive
     description:
@@ -238,7 +240,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
-<<<<<<< Updated upstream
   petitparser:
     dependency: transitive
     description:
@@ -247,6 +248,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.8"
   pointycastle:
     dependency: transitive
     description:
@@ -263,16 +272,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.1"
-=======
-  plugin_platform_interface:
-    dependency: transitive
-    description:
-      name: plugin_platform_interface
-      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.8"
->>>>>>> Stashed changes
   sky_engine:
     dependency: transitive
     description: flutter
@@ -286,6 +285,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -342,6 +349,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  uuid:
+    dependency: "direct main"
+    description:
+      name: uuid
+      sha256: cd210a09f7c18cbe5a02511718e0334de6559871052c90a90c0cca46a4aa81c8
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.3"
   vector_math:
     dependency: transitive
     description:
@@ -358,7 +373,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.0"
-<<<<<<< Updated upstream
+  win32:
+    dependency: transitive
+    description:
+      name: win32
+      sha256: "464f5674532865248444b4c3daca12bd9bf2d7c47f759ce2617986e7229494a8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.0"
   xml:
     dependency: transitive
     description:
@@ -377,17 +399,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.2.3 <4.0.0"
-  flutter: ">=2.5.0"
-=======
-  win32:
-    dependency: transitive
-    description:
-      name: win32
-      sha256: "464f5674532865248444b4c3daca12bd9bf2d7c47f759ce2617986e7229494a8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.2.0"
-sdks:
-  dart: ">=3.2.3 <4.0.0"
   flutter: ">=3.7.0"
->>>>>>> Stashed changes

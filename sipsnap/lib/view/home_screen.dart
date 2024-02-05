@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: CreatePost(),
                     ),
                   ),
-                  Recipe(),
+                  RecipePosts(),
                 ],
                 onPageChanged: (index) {
                   setState(() {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
-import 'package:sipsnap/models/recipe_post_model.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 
+import '../../models/recipe_posts_model.dart';
 import '../../view_model/recipe_posts_provider.dart';
 
 class CreatePost extends StatefulWidget {
@@ -17,10 +17,9 @@ class CreatePost extends StatefulWidget {
 
 class _CreatePostState extends State<CreatePost> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController ingredientsController = TextEditingController();
-  final TextEditingController methodController = TextEditingController();
+  final TextEditingController recipeDescriptionController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController communityDescriptionController = TextEditingController();
   bool _isRecipe = false;
   bool _isCommunityPost = false;
 
@@ -35,19 +34,17 @@ class _CreatePostState extends State<CreatePost> {
     if(_isRecipe){
       RecipePost recipePost = RecipePost(
         imagePath: 'assets/spaceneedle.jpg',
-        postTitle: titleController.text,
-        username: 'admin',
-        ingredients: ingredientsController.text,
-        method: methodController.text,
-        likes: 0,
+        recipeTitle: titleController.text,
+        chefName: 'admin',
+        description: recipeDescriptionController.text,
       );
-      context.read<RecipePostsProvider>().addRecipePost(recipePost);
+      context.read<RecipePostsProvider>().addSampleRecipePost(recipePost);
     }else{
       CommunityPost communityPost = new CommunityPost(
         imagePath: 'assets/spaceneedle.jpg',
         postTitle: titleController.text,
         username: 'admin',
-        description: descriptionController.text,
+        description: communityDescriptionController.text,
       );
       context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
     }
@@ -91,7 +88,7 @@ class _CreatePostState extends State<CreatePost> {
           if(_isRecipe)const Text("Ingredients.", style: TextStyle(color: Colors.black54, fontSize: 25)),
           if(_isRecipe)TextFormField(
             key: Key("Ingredients."),
-            controller: ingredientsController,
+            controller: recipeDescriptionController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 gapPadding: 10.0,
@@ -106,25 +103,10 @@ class _CreatePostState extends State<CreatePost> {
               return null;
             },
           ),
-          if(_isRecipe)const Text("Method.", style: TextStyle(color: Colors.black54, fontSize: 25)),
-          if(_isRecipe)TextFormField(
-            key: Key("Method."),
-            controller: methodController,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-            ),
-            // The validator receives the text that the user has entered.
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter the method.';
-              }
-              return null;
-            },
-          ),
           if(_isCommunityPost)const Text("Description.", style: TextStyle(color: Colors.black54, fontSize: 25)),
           if(_isCommunityPost)TextFormField(
             key: Key("Description."),
-            controller: descriptionController,
+            controller: communityDescriptionController,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
             ),
