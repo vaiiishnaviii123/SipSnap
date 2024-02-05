@@ -19,9 +19,12 @@ class _CreatePostState extends State<CreatePost> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController dropdownController = TextEditingController();
   bool _isRecipe = false;
   bool _isCommunityPost = false;
   String message = "";
+  List<String> list = <String>['Community Post', 'Recipe Post'];
+  String dropdownValue = "";
 
   @override
   void initState() {
@@ -73,6 +76,67 @@ class _CreatePostState extends State<CreatePost> {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            DropdownMenu<String>(
+              initialSelection: list.first,
+              controller: dropdownController,
+              requestFocusOnTap: true,
+              label: const Text('Select Post type'),
+              onSelected: (String? value) {
+                setState(() {
+                      dropdownValue = value!;
+                      if(dropdownValue == "Community Post"){
+                        _isCommunityPost = true;
+                        _isRecipe = false;
+                      }else{
+                        _isRecipe = true;
+                        _isCommunityPost = false;
+                      }
+                    });
+              },
+              dropdownMenuEntries: list
+                  .map<DropdownMenuEntry<String>>(
+                      (String value) {
+                    return DropdownMenuEntry<String>(
+                      value: value,
+                      label: value,
+                    );
+                  }).toList(),
+            ),
+      ]),
+      //         // const Text("Select Post type.", style: TextStyle(color: Colors.black54, fontSize: 15)),
+      //     Center(child: DropdownButton<String>(
+      //     value: list.first,
+      //     icon: const Icon(Icons.arrow_downward),
+      //     elevation: 16,
+      //     style: const TextStyle(color: Colors.deepPurple),
+      //     underline: Container(
+      //       height: 2,
+      //       color: Colors.deepPurpleAccent,
+      //     ),
+      //     onChanged: (String? value) {
+      //       // This is called when the user selects an item.
+      //       setState(() {
+      //         dropdownValue = value!;
+      //         if(dropdownValue == "Community Post"){
+      //           _isCommunityPost = true;
+      //           _isRecipe = false;
+      //         }else{
+      //           _isRecipe = true;
+      //           _isCommunityPost = false;
+      //         }
+      //       });
+      //     },
+      //     items: list.map<DropdownMenuItem<String>>((String value) {
+      //       return DropdownMenuItem<String>(
+      //         value: value,
+      //         child: Text(value),
+      //       );
+      //     }).toList(),
+      //   ),
+      //     ),
           if(_isRecipe)Center(child: const Text("Recipe Post.", style: TextStyle(color: Colors.black54, fontSize: 35))),
           if(_isCommunityPost)Center(child: const Text("Event Post.", style: TextStyle(color: Colors.black54, fontSize: 35))),
           //const Text("Title:", style: TextStyle(color: Colors.black54, fontSize: 25)),
