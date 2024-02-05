@@ -44,8 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // add a logo
                 const Image(image: AssetImage('assets/sip_snap@1x.png'), height: 200, width: 200),
-
-
+                
                 // Add a SizedBox to create space between the logo and the form
                 const SizedBox(height: 20),
 
@@ -57,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         TextFormField(
+                          key: const ValueKey('login email field'),
                           controller: emailController,
                           validator: (value) => value!.isEmpty ? 'Please enter your email' : null,
                           keyboardType: TextInputType.emailAddress,
