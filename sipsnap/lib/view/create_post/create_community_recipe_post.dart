@@ -10,7 +10,7 @@ import '../../models/recipe_posts_model.dart';
 import '../../view_model/recipe_posts_provider.dart';
 
 class CreatePost extends StatefulWidget {
-  const CreatePost({super.key});
+   const CreatePost({super.key});
 
   @override
   _CreatePostState createState() {
@@ -45,7 +45,6 @@ class _CreatePostState extends State<CreatePost> {
         description: descriptionController.text,
       );
       context.read<RecipePostsProvider>().addRecipePost(recipePost);
-      message = "Recipe posted successfully!";
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Recipe posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
@@ -60,7 +59,6 @@ class _CreatePostState extends State<CreatePost> {
         description: descriptionController.text,
       );
       context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
-      message = "Event posted successfully!";
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Event posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
@@ -203,19 +201,6 @@ class _CreatePostState extends State<CreatePost> {
                 if (_formKey.currentState!.validate()) {
                   // you'd often call a server or save the information in a database.
                   _onSavePressed();
-                  if(_isCommunityPost) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CommunityPosts()),
-                    );
-                  }
-                  if(_isRecipe){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const RecipePosts()),
-                    );
-                  }
                 }
                 FocusScope.of(context).unfocus();
               },
