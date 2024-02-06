@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
+import 'package:sipsnap/view/community_views/community_posts_view.dart';
+import 'package:sipsnap/view/home_screen.dart';
+import 'package:sipsnap/view/recipe_views/recipe_posts_view.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 
 import '../../models/recipe_posts_model.dart';
@@ -200,6 +203,19 @@ class _CreatePostState extends State<CreatePost> {
                 if (_formKey.currentState!.validate()) {
                   // you'd often call a server or save the information in a database.
                   _onSavePressed();
+                  if(_isCommunityPost) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CommunityPosts()),
+                    );
+                  }
+                  if(_isRecipe){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RecipePosts()),
+                    );
+                  }
                 }
                 FocusScope.of(context).unfocus();
               },
