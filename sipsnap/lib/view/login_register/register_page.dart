@@ -58,6 +58,7 @@ class _RegisterPageState extends State<RegisterPage>{
                     child: Column(
                       children: [
                         TextFormField(
+                          key: const Key('register email field'),
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) => value!.isEmpty ? 'Please enter your email' : null,
@@ -67,6 +68,7 @@ class _RegisterPageState extends State<RegisterPage>{
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          key: const Key('register password field'),
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: true,
@@ -77,6 +79,7 @@ class _RegisterPageState extends State<RegisterPage>{
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          key: const Key('register confirm password field'),
                           controller: confirmPasswordController,
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: true,
@@ -87,6 +90,7 @@ class _RegisterPageState extends State<RegisterPage>{
                         ),
                         const SizedBox(height: 20),
                         ElevatedButton(
+                          key: const Key('registerpage register button'),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               

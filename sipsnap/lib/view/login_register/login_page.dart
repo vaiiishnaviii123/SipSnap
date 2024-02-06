@@ -65,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         TextFormField(
+                          key: const ValueKey('login password field'),
                           controller: passwordController,
                           validator: (value) => value!.isEmpty ? 'Please enter your password' : null,
                           obscureText: true,
@@ -82,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children:[
                             ElevatedButton(
+                              key: const ValueKey('loginPage loginButton'),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   
@@ -109,6 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: const Text('Log in'),
                             ),
                             ElevatedButton(
+                              key: const ValueKey('login page registerButton'),
                               onPressed: () {
                                 Navigator.pushNamed(context, '/register');
                               },
@@ -122,11 +125,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 // add links to reste password for future use
                 TextButton(
+                  key: const ValueKey('loginPage forgetPasswordButton'),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('This feature is not available yet'),
-                      ),
+                      const SnackBar(content: Text('This feature is not available yet')),
                     );
                   },
                   child: const Text('Forgot password?'),
@@ -137,11 +139,10 @@ class _LoginPageState extends State<LoginPage> {
 
                 // add links to login with google 
                 ElevatedButton(
+                  key: const ValueKey('loginPage googleButton'),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('This feature is not available yet'),
-                      ),
+                      const SnackBar(content: Text('This feature is not available yet')),
                     );
                   },
                   child: const Text('Log in with Google'),
