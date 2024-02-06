@@ -55,15 +55,6 @@ class MockCommunityPostsProvider extends _i1.Mock
       );
 
   @override
-  List<_i3.CommunityPost> listAllPosts() => (super.noSuchMethod(
-        Invocation.method(
-          #listAllPosts,
-          [],
-        ),
-        returnValue: <_i3.CommunityPost>[],
-      ) as List<_i3.CommunityPost>);
-
-  @override
   void addListener(_i4.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
