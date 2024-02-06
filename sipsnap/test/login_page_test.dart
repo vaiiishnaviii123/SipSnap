@@ -1,9 +1,12 @@
 // Add a widget test for login page widget
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 import 'package:sipsnap/main.dart';
 import 'package:flutter/material.dart';
+import 'package:sipsnap/models/register_page_event.dart';
 import 'package:sipsnap/view/login_register/login_page.dart';
 import 'package:sipsnap/view/login_register/register_page.dart';
+import 'package:sipsnap/view_model/register_page_provider.dart';
 
 
 
@@ -13,6 +16,7 @@ void main(){
     //setup
     // Load the app
     await widgetTester.pumpWidget(const MyApp());
+   
 
     // fill the email and password fields
     await widgetTester.enterText(find.byKey(const Key('login email field')), 'asdasd.asd');
@@ -89,6 +93,34 @@ void main(){
     expect(find.byType(LoginPage), findsOneWidget);
   });
 
+  testWidgets('on correct email and password login should work', (widgetTester) async {
+    
+    final registerPageProvider = RegisterPageProvider();
+
+    await widgetTester.pumpWidget(
+      MaterialApp(
+        home: ChangeNotifierProvider(
+          create: (context) => registerPageProvider,
+          child: LoginPage(),
+        ),
+      ),
+    );
+
+    final event = RegisterPageEvent(
+      id: '1',
+      email: 'asd@asd.asd',
+      password: 'password',
+      confirmPassword: 'password',
+    );
+
+    registerPageProvider.addRegisterPageEvent(event);
+
+    bool result = registerPageProvider.searchUserCheckPassword('asd@asd.asd', 'password');
+
+    // expect result to be true
+    expect(result, true);
+    
+  });
 }
 
 
