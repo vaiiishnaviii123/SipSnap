@@ -65,6 +65,8 @@ android/app/src/main/assets/flutter_assets/
 /macos
 /windows/flutter/generated_plugin_registrant.cc
 
+# add coverage folder to git ignore
+coverage/
 
 # Miscellaneous
 *.log

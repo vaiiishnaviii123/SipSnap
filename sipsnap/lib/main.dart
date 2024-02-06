@@ -14,17 +14,26 @@ void main() {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   runApp(
-    MultiProvider(
-      providers: [
-        // Add your providers here
-        ChangeNotifierProvider(create: (_) => CommunityPostsProvider()),
-        ChangeNotifierProvider(create: (_) => RegisterPageProvider()),
-        ChangeNotifierProvider(
-          create: (context) => RecipePostsProvider(),
-        ),
-        // Add more providers if needed
-      ],
-      child: const MyApp(),
+    FutureBuilder(
+      future: Future.delayed(const Duration(seconds: 3)), // Adjust the duration as needed
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          // Remove the splash screen here
+          FlutterNativeSplash.remove();
+
+          // Return your MyApp with the desired configuration
+          return const MyApp();
+        } else {
+          // Return a placeholder or loading screen if needed
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        }
+      },
     ),
   );
 }
@@ -34,34 +43,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Wrap your MaterialApp with a FutureBuilder to handle the delay
-    return FutureBuilder(
-      future: Future.delayed(
-          const Duration(seconds: 3)), // Adjust the duration as needed
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          // Remove the splash screen here
-          FlutterNativeSplash.remove();
-
-          // Return your MaterialApp with the desired configuration
-          return MaterialApp(
-              initialRoute: '/',
-              routes: {
-                '/': (context) => const LoginPage(),
-                '/home': (context) => const HomeScreen(),
-                '/register': (context) => const RegisterPage(),
-              },
-              title: 'Sip Snap',
-              theme: ThemeData());
-        } else {
-          // Return a placeholder or loading screen if needed
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => RegisterPageProvider()),
+        ChangeNotifierProvider(create: (context) => CommunityPostsProvider()),
+        ChangeNotifierProvider(create: (context) => RecipePostsProvider()),
+      ],
+      child: MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const LoginPage(),
+          '/home': (context) => const HomeScreen(),
+          '/register': (context) => const RegisterPage(),
+        },
+        title: 'Sip Snap',
+        theme: ThemeData(),
+      ),
     );
   }
 }
