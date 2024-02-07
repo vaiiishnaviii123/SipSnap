@@ -14,40 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
-  void _showPostTypeDialog() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Select Post Type'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the AlertDialog
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreatePost(),
-                    ),
-                  );
-                  // Navigate to post form with Community type
-                },
-                child: const Text('Community Post'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  // Navigate to post form with Recipe type
-                },
-                child: const Text('Recipe'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+  void _onLogoutPressed(){
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 
   @override
@@ -58,7 +27,39 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Sip Snap', style: TextStyle(color: Colors.white)),
         backgroundColor: Color.fromRGBO(99,122,159, 1),
+        iconTheme: IconThemeData(size: 20, color: Colors.white),
       ),
+        drawerEnableOpenDragGesture: true,
+        drawer: Drawer(
+          backgroundColor: Color.fromRGBO(201, 215, 221, 1),
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child:  Icon(Icons.account_circle, color: Colors.blueGrey, size: 150),
+              ),
+              ListTile(
+                title: Text(
+                  'Dummy User',
+                  style: TextStyle(color: Colors.black54),
+                ),
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.black54,
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.black54),
+                ),
+                leading: IconButton(
+                  icon: const Icon(Icons.logout, color: Colors.black54),
+                  onPressed: _onLogoutPressed,
+                ),
+              ),
+            ],
+          ),
+        ),
       body: Column(
         children: [
           Expanded(
@@ -115,11 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _showPostTypeDialog,
-      //   child: Icon(Icons.add),
-      // ),
     ),
     );
   }
