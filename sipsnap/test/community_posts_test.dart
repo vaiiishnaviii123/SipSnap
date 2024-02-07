@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: ChangeNotifierProvider<CommunityPostsProvider>(
-            create: (_) => MockCommunityPostsProvider(),
+            create: (_) => MockCommunityPostsProvider1(),
             child: const CommunityPosts(),
           ),
         ),
@@ -45,9 +45,9 @@ void main() {
 }
 
 // Mock CommunityPostsProvider for testing
-class MockCommunityPostsProvider extends CommunityPostsProvider {
+class MockCommunityPostsProvider1 extends CommunityPostsProvider {
   @override
-  List<CommunityPost> get communityPosts => [
+  List<CommunityPost> get communityPostsList => [
         CommunityPost(
           postTitle: 'Mock Post 1',
           username: 'MockUser1',

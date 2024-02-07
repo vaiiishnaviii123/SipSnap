@@ -42,6 +42,7 @@ class _RecipePostCardState extends State<RecipePostCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      key: Key('card'),
       margin: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

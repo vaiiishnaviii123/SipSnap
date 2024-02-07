@@ -7,7 +7,7 @@ import '../../models/recipe_posts_model.dart';
 import '../../view_model/recipe_posts_provider.dart';
 
 class CreatePost extends StatefulWidget {
-  const CreatePost({super.key});
+   const CreatePost({super.key});
 
   @override
   _CreatePostState createState() {
@@ -42,9 +42,9 @@ class _CreatePostState extends State<CreatePost> {
         description: descriptionController.text,
       );
       context.read<RecipePostsProvider>().addRecipePost(recipePost);
-      message = "Recipe posted successfully!";
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
+          key: Key("Snackbar"),
           content: Text("Recipe posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
           backgroundColor: Color.fromRGBO(232,200,114, 1),
         ),
@@ -57,7 +57,6 @@ class _CreatePostState extends State<CreatePost> {
         description: descriptionController.text,
       );
       context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
-      message = "Event posted successfully!";
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Event posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
@@ -83,6 +82,7 @@ class _CreatePostState extends State<CreatePost> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             DropdownMenu<String>(
+              key: Key("Type"),
               initialSelection: list.first,
               controller: dropdownController,
               requestFocusOnTap: true,
@@ -111,42 +111,11 @@ class _CreatePostState extends State<CreatePost> {
                   }).toList(),
             ),
       ]),
-      //         // const Text("Select Post type.", style: TextStyle(color: Colors.black54, fontSize: 15)),
-      //     Center(child: DropdownButton<String>(
-      //     value: list.first,
-      //     icon: const Icon(Icons.arrow_downward),
-      //     elevation: 16,
-      //     style: const TextStyle(color: Colors.deepPurple),
-      //     underline: Container(
-      //       height: 2,
-      //       color: Colors.deepPurpleAccent,
-      //     ),
-      //     onChanged: (String? value) {
-      //       // This is called when the user selects an item.
-      //       setState(() {
-      //         dropdownValue = value!;
-      //         if(dropdownValue == "Community Post"){
-      //           _isCommunityPost = true;
-      //           _isRecipe = false;
-      //         }else{
-      //           _isRecipe = true;
-      //           _isCommunityPost = false;
-      //         }
-      //       });
-      //     },
-      //     items: list.map<DropdownMenuItem<String>>((String value) {
-      //       return DropdownMenuItem<String>(
-      //         value: value,
-      //         child: Text(value),
-      //       );
-      //     }).toList(),
-      //   ),
-      //     ),
           if(_isRecipe)Center(child: const Text("Recipe Post.", style: TextStyle(color:  Color.fromRGBO(99,122,159, 1), fontSize: 35))),
           if(_isCommunityPost)Center(child: const Text("Event Post.", style: TextStyle(color:  Color.fromRGBO(99,122,159, 1), fontSize: 35))),
           //const Text("Title:", style: TextStyle(color: Colors.black54, fontSize: 25)),
           TextFormField(
-            key: Key("Title."),
+            key: Key("Title"),
             controller: titleController,
             decoration: InputDecoration(
              labelText: message,
@@ -171,7 +140,7 @@ class _CreatePostState extends State<CreatePost> {
           if(_isRecipe)const Text("Ingredients and Method.", style: TextStyle(color: Colors.black54, fontSize: 20)),
           if(_isCommunityPost)const Text("Description.", style: TextStyle(color: Colors.black54, fontSize: 20)),
           TextFormField(
-            key: Key("Description."),
+            key: Key("Description"),
             controller: descriptionController,
             maxLines: 3,
             decoration: InputDecoration(
@@ -189,12 +158,12 @@ class _CreatePostState extends State<CreatePost> {
           ),
           Center(
             child: ElevatedButton(
+              key: Key("SavePost"),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(200, 50),
                 backgroundColor: Color.fromRGBO(99,122,159, 1),
                 foregroundColor: Colors.white,
               ),
-              key: Key("SaveButton"),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
