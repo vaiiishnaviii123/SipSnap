@@ -42,13 +42,6 @@ class _CreatePostState extends State<CreatePost> {
         description: descriptionController.text,
       );
       context.read<RecipePostsProvider>().addRecipePost(recipePost);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          key: Key("Snackbar"),
-          content: Text("Recipe posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
-          backgroundColor: Color.fromRGBO(232,200,114, 1),
-        ),
-      );
     }else{
       CommunityPost communityPost = new CommunityPost(
         imagePath: 'assets/spaceneedle.jpg',
@@ -57,12 +50,6 @@ class _CreatePostState extends State<CreatePost> {
         description: descriptionController.text,
       );
       context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Event posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
-          backgroundColor: Color.fromRGBO(232,200,114, 1),
-        ),
-      );
     }
     titleController.clear();
     descriptionController.clear();
@@ -73,7 +60,8 @@ class _CreatePostState extends State<CreatePost> {
     // TODO: implement build
     return Form(
       key: _formKey,
-      child: SingleChildScrollView(
+      child: Scaffold(
+        body: SingleChildScrollView(
         child: Wrap(
         //crossAxisAlignment: CrossAxisAlignment.start,
           runSpacing:7,
@@ -169,6 +157,13 @@ class _CreatePostState extends State<CreatePost> {
                 if (_formKey.currentState!.validate()) {
                   // you'd often call a server or save the information in a database.
                   _onSavePressed();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      key: Key("SnackBar"),
+                      content: Text("Posted successfully!", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
+                      backgroundColor: Color.fromRGBO(232,200,114, 1),
+                    ),
+                  );
                 }
                 FocusScope.of(context).unfocus();
               },
@@ -178,6 +173,7 @@ class _CreatePostState extends State<CreatePost> {
         ],
         ),
     ),
+      ),
     );
   }
 }

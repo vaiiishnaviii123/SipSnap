@@ -56,10 +56,17 @@ void main() {
 
     await tester.enterText(titleFinder, "Seattle Boba Event");
     await tester.enterText(descriptionFinder, "Events in 2024.");
-    await tester.tap(buttonFinder, warnIfMissed: false);
-    // have to advance another frame to get past loading spinner
-    await tester.pump();
-    await tester.pump(Duration(seconds: 5));
+    await tester.dragUntilVisible(
+      buttonFinder, // what you want to find
+      find.byType(SingleChildScrollView), // widget you want to scroll
+      const Offset(0, 50), // delta to move
+    );
+    await tester.tap(buttonFinder);
+    await tester.pumpAndSettle();
+
+    final snackBarFinder = find.byKey(ValueKey("SnackBar"));
+    expect(snackBarFinder, findsOneWidget);
+    expect(find.textContaining('successfully'), findsOneWidget);
 
     await tester.pumpWidget(
         ChangeNotifierProvider.value(
@@ -124,10 +131,17 @@ void main() {
 
     await tester.enterText(titleFinder, "Lavender Boba");
     await tester.enterText(descriptionFinder, "First Recipe.");
-    await tester.tap(buttonFinder, warnIfMissed: false);
-    // have to advance another frame to get past loading spinner
-    await tester.pump();
-    await tester.pump(Duration(seconds: 5));
+    await tester.dragUntilVisible(
+      buttonFinder, // what you want to find
+      find.byType(SingleChildScrollView), // widget you want to scroll
+      const Offset(0, 50), // delta to move
+    );
+    await tester.tap(buttonFinder);
+    await tester.pumpAndSettle();
+
+    final snackBarFinder = find.byKey(ValueKey("SnackBar"));
+    expect(snackBarFinder, findsOneWidget);
+    expect(find.textContaining('successfully'), findsOneWidget);
 
     await tester.pumpWidget(
         ChangeNotifierProvider.value(
@@ -147,5 +161,46 @@ void main() {
     expect(find.textContaining('Admin'), findsOneWidget);
 
     verify(mockRecipePostsProvider.recipePosts);
+  });
+
+  testWidgets('Testing erros on create post', (tester) async {
+    RecipePostsProvider mockRecipePostsProvider = MockRecipePostsProvider();
+
+    List<RecipePost> recipeEvents = [
+      RecipePost(
+          recipeTitle: "Lavender Boba",
+          userName: "Admin",
+          description: "First Recipe",
+          imagePath: 'assets/spaceneedle.jpg')
+    ];
+
+    when(
+        mockRecipePostsProvider.recipePosts
+    ).thenAnswer((_) => recipeEvents);
+
+
+    await tester.pumpWidget(
+        ChangeNotifierProvider.value(
+            value: mockRecipePostsProvider,
+            child: const MaterialApp(
+                home: Material(
+                    child: CreatePost()
+                )
+            )
+        )
+    );
+    final buttonFinder = find.byKey(ValueKey('SavePost'));
+
+    expect(buttonFinder, findsOneWidget);
+    await tester.dragUntilVisible(
+      buttonFinder, // what you want to find
+      find.byType(SingleChildScrollView), // widget you want to scroll
+      const Offset(0, 50), // delta to move
+    );
+    await tester.tap(buttonFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Please enter a title'), findsOneWidget);
+    expect(find.textContaining('Please enter the description'), findsOneWidget);
   });
 }
