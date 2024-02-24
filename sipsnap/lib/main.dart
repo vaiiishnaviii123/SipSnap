@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:sipsnap/view/login_register/login_page.dart';
-import 'package:sipsnap/view/login_register/register_page.dart';
+import 'package:sipsnap/router.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 import 'package:sipsnap/view_model/register_page_provider.dart';
 import 'package:sipsnap/view_model/recipe_posts_provider.dart';
-import 'view/home_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   // this displays the splash screen for a few seconds before the app starts
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   runApp(
+    // use this future builder to load all the data from DB before the app starts until then it will display the splash screen
     FutureBuilder(
-      future: Future.delayed(const Duration(seconds: 3)), // Adjust the duration as needed
+      future: Future.delayed(const Duration(seconds: 3)), // add your future here to load data now its static to 3 seconds
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          // Remove the splash screen here
           FlutterNativeSplash.remove();
-
-          // Return your MyApp with the desired configuration
-          return const MyApp();
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (context) => RecipePostsProvider()),
+              ChangeNotifierProvider(create: (context) => CommunityPostsProvider()),
+              ChangeNotifierProvider(create: (context) => RegisterPageProvider()),
+            ],
+            child: const MyApp(),
+          );
         } else {
           // Return a placeholder or loading screen if needed
           return const MaterialApp(
@@ -43,22 +46,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => RegisterPageProvider()),
-        ChangeNotifierProvider(create: (context) => CommunityPostsProvider()),
-        ChangeNotifierProvider(create: (context) => RecipePostsProvider()),
-      ],
-      child: MaterialApp(
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const LoginPage(),
-          '/home': (context) => const HomeScreen(),
-          '/register': (context) => const RegisterPage(),
-        },
-        title: 'Sip Snap',
-        theme: ThemeData(),
-      ),
+    return MaterialApp.router(
+      routerConfig: goRouter, 
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.amber),
     );
   }
 }
