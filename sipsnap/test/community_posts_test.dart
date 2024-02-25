@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
-import 'package:sipsnap/view/community_views/community_posts_view.dart';
+import 'package:sipsnap/view/community_views/community_posts_page.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 
 void main() {

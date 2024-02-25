@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/recipe_posts_model.dart';
-import 'package:sipsnap/view/recipe_views/recipe_posts_view.dart';
+import 'package:sipsnap/view/recipe_views/recipe_posts_page.dart';
 import 'package:sipsnap/view_model/recipe_posts_provider.dart';
 
 void main() {
