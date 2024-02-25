@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "198417524006",
+    "project_id": "sipsnap",
+    "storage_bucket": "sipsnap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198417524006:android:f80242784655148d640de7",
+        "android_client_info": {
+          "package_name": "com.example.sipsnap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdMrhLVR_K0Ahn__Rm91yPKn0VKX7q0GY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
