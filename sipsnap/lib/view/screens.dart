@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sipsnap/view/custom_drawer.dart';
 
 class ScaffoldWithNestedNavigation extends StatelessWidget {
   const ScaffoldWithNestedNavigation({
@@ -34,14 +35,19 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
     required this.selectedIndex,
     required this.onDestinationSelected,
   });
+
   final Widget body;
   final int selectedIndex;
   final ValueChanged<int> onDestinationSelected;
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+        title: const Text('Sip Snap'),
+      ),
+      drawer: const CustomDrawer(),
       body: body,
       bottomNavigationBar: NavigationBar(
         indicatorColor: Colors.amber,

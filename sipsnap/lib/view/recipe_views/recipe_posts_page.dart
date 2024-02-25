@@ -12,9 +12,6 @@ class RecipePostsPage extends StatelessWidget {
     var recipePostsProvider = Provider.of<RecipePostsProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Boba Recipes'),
-      ),
       body: ListView.builder(
         itemCount: recipePostsProvider.recipePosts.length,
         itemBuilder: (context, index) {

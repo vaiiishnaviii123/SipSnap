@@ -12,9 +12,6 @@ class CommunityPostsPage extends StatelessWidget {
     var communityPostsProvider = Provider.of<CommunityPostsProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Boba Community Posts'),
-      ),
       body: ListView.builder(
         itemCount: communityPostsProvider.communityPosts.length,
         itemBuilder: (context, index) {
