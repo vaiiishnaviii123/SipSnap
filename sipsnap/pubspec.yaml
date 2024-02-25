@@ -40,6 +40,7 @@ dependencies:
   uuid: ^4.3.2
   mockito: ^5.0.0
   firebase_core: ^2.25.4
+  go_router:
 
 dev_dependencies:
   flutter_test:

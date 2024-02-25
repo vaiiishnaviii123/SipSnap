@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
-
 import '../../models/recipe_posts_model.dart';
 import '../../view_model/recipe_posts_provider.dart';
 
-class CreatePost extends StatefulWidget {
-   const CreatePost({super.key});
+class CreatePostPage extends StatefulWidget {
+   const CreatePostPage({super.key});
 
   @override
-  _CreatePostState createState() {
-    return _CreatePostState();
-  }
+  createState() => _CreatePostPageState();
 }
 
-class _CreatePostState extends State<CreatePost> {
+class _CreatePostPageState extends State<CreatePostPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -43,7 +40,7 @@ class _CreatePostState extends State<CreatePost> {
       );
       context.read<RecipePostsProvider>().addRecipePost(recipePost);
     }else{
-      CommunityPost communityPost = new CommunityPost(
+      CommunityPost communityPost = CommunityPost(
         imagePath: 'assets/spaceneedle.jpg',
         postTitle: titleController.text,
         username: 'admin',
@@ -70,7 +67,7 @@ class _CreatePostState extends State<CreatePost> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             DropdownMenu<String>(
-              key: Key("Type"),
+              key: const Key("Type"),
               initialSelection: list.first,
               controller: dropdownController,
               requestFocusOnTap: true,
