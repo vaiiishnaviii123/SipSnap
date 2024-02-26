@@ -34,7 +34,7 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
               height: 200.0, // Adjust the height as needed
               width: double.infinity,
               color: Colors.grey, // Placeholder color
-              child: Image.asset(widget.post.imagePath, fit: BoxFit.cover)),
+              child: Image.asset(widget.post.imageRef, fit: BoxFit.cover)),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

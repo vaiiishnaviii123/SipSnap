@@ -7,13 +7,13 @@ class CommunityPostsProvider extends ChangeNotifier {
       postTitle: 'Capitol Hill Boba Event',
       username: 'Shawn_56',
       description: 'This is a sample description for post 1.',
-      imagePath: 'assets/boba1.jpg',
+      imageRef: 'assets/boba1.jpg',
     ),
     CommunityPost(
       postTitle: 'Space Needle Events',
       username: 'Ricky_007',
       description: 'This is a sample description for post 2.',
-      imagePath: 'assets/spaceneedle.jpg',
+      imageRef: 'assets/spaceneedle.jpg',
     ),
   ];
 
