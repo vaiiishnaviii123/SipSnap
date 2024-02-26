@@ -12,7 +12,12 @@
           "package_name": "com.example.sipsnap"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "198417524006-fr6i2cs505ofe34v8dn93r2rfibcan81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDdMrhLVR_K0Ahn__Rm91yPKn0VKX7q0GY"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198417524006-fr6i2cs505ofe34v8dn93r2rfibcan81.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "198417524006-7uvf99duir4q0ur97mf0di4o6pl9qatn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sipsnap.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

@@ -60,9 +60,13 @@ android/app/intermediates/
 android/app/.externalNativeBuild/
 android/app/src/main/assets/flutter_assets/
 
-/windows
-/linux
-/macos
+# whole ios, web folder
+ios/
+web/
+
+
+
+
 /windows/flutter/generated_plugin_registrant.cc
 
 # add coverage folder to git ignore
