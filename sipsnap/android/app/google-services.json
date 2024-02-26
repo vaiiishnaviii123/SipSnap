@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "198417524006-6lnmdhjrkl42lg1f30mkn4drvercs957.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sipsnap",
+            "certificate_hash": "74a0a619d03d4837b6605a58976ba9d59fc75335"
+          }
+        },
+        {
+          "client_id": "198417524006-l99p7n96ull5lprcp3a3bo7hmgpd8k71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sipsnap",
+            "certificate_hash": "d966c6e210830c0197f5854e86801d99825dd40b"
+          }
+        },
+        {
           "client_id": "198417524006-fr6i2cs505ofe34v8dn93r2rfibcan81.apps.googleusercontent.com",
           "client_type": 3
         }

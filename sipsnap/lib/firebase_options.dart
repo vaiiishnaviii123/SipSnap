@@ -17,24 +17,15 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -52,11 +43,42 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAL7Gkj5H1afOckXR6KQe_aCCzzdsPtvMQ',
+    appId: '1:198417524006:web:a57c9eaac71e9486640de7',
+    messagingSenderId: '198417524006',
+    projectId: 'sipsnap',
+    authDomain: 'sipsnap.firebaseapp.com',
+    storageBucket: 'sipsnap.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDdMrhLVR_K0Ahn__Rm91yPKn0VKX7q0GY',
     appId: '1:198417524006:android:f80242784655148d640de7',
     messagingSenderId: '198417524006',
     projectId: 'sipsnap',
     storageBucket: 'sipsnap.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBXJHc6bSDvJ7MSOSDkxHmpV3oe3usPYio',
+    appId: '1:198417524006:ios:fa86831b7fe47865640de7',
+    messagingSenderId: '198417524006',
+    projectId: 'sipsnap',
+    storageBucket: 'sipsnap.appspot.com',
+    androidClientId: '198417524006-6lnmdhjrkl42lg1f30mkn4drvercs957.apps.googleusercontent.com',
+    iosClientId: '198417524006-i723iv895gp45t23g4fqqf6o7jesbq6n.apps.googleusercontent.com',
+    iosBundleId: 'com.example.sipsnap',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBXJHc6bSDvJ7MSOSDkxHmpV3oe3usPYio',
+    appId: '1:198417524006:ios:3faa0c7e51f5d878640de7',
+    messagingSenderId: '198417524006',
+    projectId: 'sipsnap',
+    storageBucket: 'sipsnap.appspot.com',
+    androidClientId: '198417524006-6lnmdhjrkl42lg1f30mkn4drvercs957.apps.googleusercontent.com',
+    iosClientId: '198417524006-7uvf99duir4q0ur97mf0di4o6pl9qatn.apps.googleusercontent.com',
+    iosBundleId: 'com.example.sipsnap.RunnerTests',
   );
 }
