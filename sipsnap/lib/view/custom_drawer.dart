@@ -29,13 +29,6 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Settings'),
-            trailing: const Icon(Icons.settings),
-            onTap: () {
-              goRouter.go('/settings'); // /setting route is not yet defined first make it in router file
-            },
-          ),
-          ListTile(
             title: const Text('Log Out'),
             trailing: const Icon(Icons.logout),
             onTap: () {
