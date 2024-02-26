@@ -52,7 +52,7 @@ class _RecipePostCardState extends State<RecipePostCard> {
             height: 200.0,
             width: double.infinity,
             color: Colors.grey,
-            child: Image.asset(widget.post.imagePath, fit: BoxFit.cover),
+            child: Image.asset(widget.post.imageRef, fit: BoxFit.cover),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

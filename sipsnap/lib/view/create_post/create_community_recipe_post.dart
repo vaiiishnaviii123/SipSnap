@@ -4,6 +4,7 @@ import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 
 import '../../models/recipe_posts_model.dart';
+import '../../view_model/recipe_database_service.dart';
 import '../../view_model/recipe_posts_provider.dart';
 
 class CreatePost extends StatefulWidget {
@@ -25,6 +26,7 @@ class _CreatePostState extends State<CreatePost> {
   String message = "Community event Title";
   List<String> list = <String>['Community Post', 'Recipe Post'];
   String dropdownValue = "";
+  RecipeDatabase recipeDatabase = new RecipeDatabase();
 
   @override
   void initState() {
@@ -36,12 +38,13 @@ class _CreatePostState extends State<CreatePost> {
   void _onSavePressed(){
     if(_isRecipe){
       RecipePost recipePost = RecipePost(
-        imagePath: 'assets/spaceneedle.jpg',
+        imageRef: 'assets/spaceneedle.jpg',
         recipeTitle: titleController.text,
         userName: 'admin',
         description: descriptionController.text,
       );
       context.read<RecipePostsProvider>().addRecipePost(recipePost);
+      recipeDatabase.addRecipe(recipePost);
     }else{
       CommunityPost communityPost = new CommunityPost(
         imagePath: 'assets/spaceneedle.jpg',

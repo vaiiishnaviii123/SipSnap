@@ -96,7 +96,7 @@ void main() {
           recipeTitle: "Lavender Boba",
           userName: "Admin",
           description: "First Recipe",
-          imagePath: 'assets/spaceneedle.jpg')
+          imageRef: 'assets/spaceneedle.jpg')
     ];
 
     when(
@@ -171,7 +171,7 @@ void main() {
           recipeTitle: "Lavender Boba",
           userName: "Admin",
           description: "First Recipe",
-          imagePath: 'assets/spaceneedle.jpg')
+          imageRef: 'assets/spaceneedle.jpg')
     ];
 
     when(

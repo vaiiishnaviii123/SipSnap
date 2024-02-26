@@ -28,7 +28,7 @@ void main() {
         recipeTitle: 'Test Recipe',
         userName: 'TestChef',
         description: 'Test Description',
-        imagePath: 'assets/boba2.jpg',
+        imageRef: 'assets/boba2.jpg',
       );
 
       await tester.pumpWidget(
@@ -52,13 +52,13 @@ class MockRecipePostsProvider extends RecipePostsProvider {
           recipeTitle: 'Mock Recipe 1',
           userName: 'MockChef1',
           description: 'Mock Description 1',
-          imagePath: 'assets/boba2.jpg',
+          imageRef: 'assets/boba2.jpg',
         ),
         RecipePost(
           recipeTitle: 'Mock Recipe 2',
           userName: 'MockChef2',
           description: 'Mock Description 2',
-          imagePath: 'assets/boba2.jpg',
+          imageRef: 'assets/boba2.jpg',
         ),
       ];
 }
