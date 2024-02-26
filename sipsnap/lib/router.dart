@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sipsnap/view/community_views/community_posts_page.dart';
 import 'package:sipsnap/view/create_post/Create_post_page.dart';
 import 'package:sipsnap/view/login_register/login_page.dart';
-import 'package:sipsnap/view/profile_page.dart';
+import 'package:sipsnap/view/profile_views/profile_page.dart';
 import 'package:sipsnap/view/recipe_views/recipe_posts_page.dart';
 import 'package:sipsnap/view/screens.dart';
 
