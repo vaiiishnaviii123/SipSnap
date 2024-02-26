@@ -8,7 +8,7 @@ class RecipePostsProvider extends ChangeNotifier {
         recipeTitle: 'Delicious Boba Pearls',
         userName: 'admin',
         description: "Follow the steps to make this amazing boba.",
-        imagePath: 'assets/boba2.jpg'),
+        imageRef: 'assets/boba2.jpg'),
   ];
 
   List<RecipePost> get recipePosts => _recipePosts;

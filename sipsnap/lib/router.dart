@@ -18,13 +18,13 @@ final goRouter = GoRouter(
     GoRoute(
       path: '/login',
       pageBuilder: (context, state) => const NoTransitionPage(
-        child: LoginPage()
+          child: LoginPage()
       ),
     ),
     GoRoute(
       path: '/register',
       pageBuilder: (context, state) => const NoTransitionPage(
-        child: RegisterPage()
+          child: RegisterPage()
       ),
     ),
     StatefulShellRoute.indexedStack(
@@ -44,16 +44,16 @@ final goRouter = GoRouter(
           ],
         ),
         StatefulShellBranch(
-          routes: [
-            // Create
-            GoRoute(
-              path: '/create',
-              pageBuilder: (context, state) => const NoTransitionPage(
-                child: CreatePostPage(),
+            routes: [
+              // Create
+              GoRoute(
+                path: '/create',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: CreatePostPage(),
+                ),
+                //routes:[]
               ),
-              //routes:[]
-            ),
-          ]
+            ]
         ),
         StatefulShellBranch(
           routes: [
@@ -63,7 +63,7 @@ final goRouter = GoRouter(
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: RecipePostsPage(),
               ),
-              // use this ti make nested routes 
+              // use this ti make nested routes
               // routes: [
               //   GoRoute(
               //     path: 'edit/:uuid',
@@ -72,7 +72,7 @@ final goRouter = GoRouter(
               //       return NoTransitionPage(
               //         child: EditDietPage(uuid: uuid),
               //       );
-              //     } 
+              //     }
               //   ),
               // ],
             ),
