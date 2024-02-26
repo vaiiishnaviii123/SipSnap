@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 import '../../models/recipe_posts_model.dart';
+import '../../view_model/community_database_service.dart';
 import '../../view_model/recipe_database_service.dart';
 import '../../view_model/recipe_posts_provider.dart';
 
@@ -24,6 +25,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
   List<String> list = <String>['Community Post', 'Recipe Post'];
   String dropdownValue = "";
   RecipeDatabase recipeDatabase = new RecipeDatabase();
+  CommunityDatabase communityDatabase = new CommunityDatabase();
 
   @override
   void initState() {
@@ -44,12 +46,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
       recipeDatabase.addRecipe(recipePost);
     }else{
       CommunityPost communityPost = CommunityPost(
-        imagePath: 'assets/spaceneedle.jpg',
+        imageRef: 'assets/spaceneedle.jpg',
         postTitle: titleController.text,
         username: 'admin',
         description: descriptionController.text,
       );
       context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
+      communityDatabase.addCommunityPost(communityPost);
     }
     titleController.clear();
     descriptionController.clear();

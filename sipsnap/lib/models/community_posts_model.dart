@@ -2,12 +2,12 @@ class CommunityPost {
   final String postTitle;
   final String username;
   final String description;
-  final String imagePath;
+  final String imageRef;
 
   CommunityPost({
     required this.postTitle,
     required this.username,
     required this.description,
-    required this.imagePath,
+    required this.imageRef,
   });
 }
