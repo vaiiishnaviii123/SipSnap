@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sipsnap/main.dart';
 import 'package:flutter/material.dart';
 import 'package:sipsnap/models/register_page_event.dart';
-import 'package:sipsnap/view/login_register/login_page.dart';
+import 'package:sipsnap/view/login/login_page.dart';
 import 'package:sipsnap/view/login_register/register_page.dart';
 import 'package:sipsnap/view_model/register_page_provider.dart';
 
