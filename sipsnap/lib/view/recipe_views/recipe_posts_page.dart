@@ -1,58 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sipsnap/models/community_posts_model.dart';
-import 'package:sipsnap/view_model/community_posts_provider.dart';
+import 'package:sipsnap/models/recipe_posts_model.dart';
+import 'package:sipsnap/view_model/recipe_posts_provider.dart';
 
-class CommunityPosts extends StatelessWidget {
-  const CommunityPosts({Key? key}) : super(key: key);
+class RecipePostsPage extends StatelessWidget {
+  const RecipePostsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Accessing the CommunityPostsProvider
-    var communityPostsProvider = Provider.of<CommunityPostsProvider>(context);
+    // Accessing the RecipePostsProvider
+    var recipePostsProvider = Provider.of<RecipePostsProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Boba Community Posts'),
-      ),
       body: ListView.builder(
-        itemCount: communityPostsProvider.communityPosts.length,
+        itemCount: recipePostsProvider.recipePosts.length,
         itemBuilder: (context, index) {
-          var post = communityPostsProvider.communityPosts[index];
-          return CommunityPostCard(post: post);
+          var post = recipePostsProvider.recipePosts[index];
+          return RecipePostCard(post: post);
         },
       ),
     );
   }
 }
 
-class CommunityPostCard extends StatefulWidget {
-  final CommunityPost post;
+class RecipePostCard extends StatefulWidget {
+  final RecipePost post;
 
-  const CommunityPostCard({Key? key, required this.post}) : super(key: key);
+  const RecipePostCard({Key? key, required this.post}) : super(key: key);
 
   @override
-  _CommunityPostCardState createState() => _CommunityPostCardState();
+  createState() => _RecipePostCardState();
 }
 
-class _CommunityPostCardState extends State<CommunityPostCard> {
+class _RecipePostCardState extends State<RecipePostCard> {
   int likeCount = 0;
   bool isLiked = false;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      key: Key("card"),
+      key: Key('card'),
       margin: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 1. Photo of the post
           Container(
-              height: 200.0, // Adjust the height as needed
-              width: double.infinity,
-              color: Colors.grey, // Placeholder color
-              child: Image.asset(widget.post.imagePath, fit: BoxFit.cover)),
+            height: 200.0,
+            width: double.infinity,
+            color: Colors.grey,
+            child: Image.asset(widget.post.imageRef, fit: BoxFit.cover),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -60,11 +58,11 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
               children: [
                 // Title of the post
                 Text(
-                  widget.post.postTitle,
+                  widget.post.recipeTitle,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                // Username
-                Text(widget.post.username),
+                // Chef's name
+                Text(widget.post.userName),
                 // Likes button and comments section
                 Row(
                   children: [
@@ -89,7 +87,7 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
                   ],
                 ),
                 const SizedBox(height: 8.0),
-                //  Description
+                // Description
                 Text(widget.post.description),
               ],
             ),
