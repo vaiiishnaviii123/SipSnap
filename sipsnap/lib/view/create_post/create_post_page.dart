@@ -10,6 +10,7 @@ import '../../models/recipe_posts_model.dart';
 import '../../view_model/community_database_service.dart';
 import '../../view_model/recipe_database_service.dart';
 import '../../view_model/recipe_posts_provider.dart';
+import '../../view_model/user_provider.dart';
 
 class CreatePostPage extends StatefulWidget {
    const CreatePostPage({super.key});
@@ -30,7 +31,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
   String dropdownValue = "";
   RecipeDatabase recipeDatabase = new RecipeDatabase();
   CommunityDatabase communityDatabase = new CommunityDatabase();
-
   // image url for the image uploaded
   String imageUrl = "";
 
@@ -67,20 +67,21 @@ class _CreatePostPageState extends State<CreatePostPage> {
   }
 
   void _onSavePressed(){
+    String? userName =  context.read<UserProvider>().currentUser?.name;
     if(_isRecipe){
       RecipePost recipePost = RecipePost(
-        imageRef: 'assets/spaceneedle.jpg',
+        imageRef: imageUrl,
         recipeTitle: titleController.text,
-        userName: 'admin',
+        userName: userName,
         description: descriptionController.text,
       );
       context.read<RecipePostsProvider>().addRecipePost(recipePost);
       recipeDatabase.addRecipe(recipePost);
     }else{
       CommunityPost communityPost = CommunityPost(
-        imageRef: 'assets/spaceneedle.jpg',
+        imageRef: imageUrl,
         postTitle: titleController.text,
-        username: 'admin',
+        username: userName,
         description: descriptionController.text,
       );
       context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
