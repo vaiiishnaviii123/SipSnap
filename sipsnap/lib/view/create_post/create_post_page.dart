@@ -74,6 +74,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     titleController.clear();
     descriptionController.clear();
     url = "";
+    imageUrl= "";
     if(_isRecipe){
       goRouter.go('/recipe');
     }else{
