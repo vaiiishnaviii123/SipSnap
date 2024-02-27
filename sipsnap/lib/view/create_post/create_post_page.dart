@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,13 +32,16 @@ class _CreatePostPageState extends State<CreatePostPage> {
   CommunityDatabase communityDatabase = new CommunityDatabase();
   // image url for the image uploaded
   String imageUrl = "";
+  String url = "";
 
 
   Future<void> _getImage(ImageSource source) async {
     final ImagePicker _picker = ImagePicker();
     final XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
-
+        setState(() {
+          url = image.path;
+        });
       // reference to the firebase storage
       Reference ref = FirebaseStorage.instance.ref().child('images');
 
@@ -89,6 +91,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     }
     titleController.clear();
     descriptionController.clear();
+    url = "";
   }
 
   @override
@@ -175,6 +178,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 icon: const Icon(Icons.photo, color: Colors.black, size: 35),
               ),
             ],
+          ),
+          if(url != "")Container(
+            height: 400.0,
+            color: Colors.grey,
+            child: Image.file(File(url), fit: BoxFit.cover, width: double.infinity),
           ),
           if(_isRecipe)const Text("Ingredients and Method.", style: TextStyle(color: Colors.black54, fontSize: 20)),
           if(_isCommunityPost)const Text("Description.", style: TextStyle(color: Colors.black54, fontSize: 20)),
