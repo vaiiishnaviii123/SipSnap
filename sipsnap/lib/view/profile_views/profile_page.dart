@@ -11,26 +11,32 @@ class ProfilePage extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Page'),
+        backgroundColor:  Colors.blueGrey,
+        title: const Text('Profile Page', style: TextStyle(color: Colors.white),),
+        leading: BackButton(
+          color: Colors.white,
+            onPressed: (){
+              goRouter.go('/community');
+            },
+        ),
       ),
       body: Center(
-        child: Column(
+          child: Column(
           children: [
-            const Text('Profile Page'),
-            Text('Name: ${userProvider.currentUser?.name}'),
-            Text('Email: ${userProvider.currentUser?.email}'),
-            Text('UUID: ${userProvider.currentUser?.uuid}'),
-            Image.network(userProvider.currentUser?.photoUrl ?? ''),
-            ElevatedButton(
-              onPressed: (){
-                goRouter.go('/community');
-              }, 
-              child: const Text('Back')
+            const SizedBox(height: 15.0),
+            ClipOval(
+              child: SizedBox.fromSize(
+                size: Size.fromRadius(48), // Image radius
+                child: Image.network(userProvider.currentUser?.photoUrl ?? '',fit: BoxFit.cover,),
+              ),
             ),
+            const SizedBox(height: 15.0),
+            Text('Name: ${userProvider.currentUser?.name}'),
+            const SizedBox(height: 15.0),
+            Text('Email: ${userProvider.currentUser?.email}'),
           ],
         ),
-
-      ),
+        ),
     );
   }
 }
