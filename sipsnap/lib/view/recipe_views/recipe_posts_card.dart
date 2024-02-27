@@ -31,6 +31,14 @@ class _RecipePostCardState extends State<RecipePostCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Icon(Icons.account_circle, color: Colors.blueGrey, size: 40),
+              const SizedBox(height: 8.0),
+              const SizedBox(width: 8.0),
+              Text(widget.post.userName!),
+            ],
+          ),
           // 1. Photo of the post
           if(widget.post.imageRef.isNotEmpty)Container(
             height: 200.0, // Adjust the height as needed
@@ -58,7 +66,6 @@ class _RecipePostCardState extends State<RecipePostCard> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 // Chef's name
-                Text(widget.post.userName!),
                 const SizedBox(height: 8.0),
                 // Description
                 Text(widget.post.description),

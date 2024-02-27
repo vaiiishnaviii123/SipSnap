@@ -4,6 +4,7 @@ import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view/comment_drawer.dart';
 
 import '../../view_model/comment_provider.dart';
+import '../../view_model/user_provider.dart';
 
 class CommunityPostCard extends StatefulWidget {
   final CommunityPost post;
@@ -26,12 +27,21 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Card(
       key: const Key("card"),
       margin: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Icon(Icons.account_circle, color: Colors.blueGrey, size: 40),
+              const SizedBox(height: 8.0),
+              const SizedBox(width: 8.0),
+              Text(widget.post.username!),
+            ],
+          ),
           // 1. Photo of the post
           if(widget.post.imageRef.isNotEmpty)Container(
               height: 200.0, // Adjust the height as needed
@@ -59,7 +69,6 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 // Username
-                Text(widget.post.username!),
                 // Likes button and comments section
                 const SizedBox(height: 8.0),
                 // Description
