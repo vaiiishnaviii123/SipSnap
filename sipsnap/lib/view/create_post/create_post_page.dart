@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
+import 'package:sipsnap/view/create_post/file_picker.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 import '../../models/recipe_posts_model.dart';
 import '../../view_model/community_database_service.dart';
@@ -34,38 +35,23 @@ class _CreatePostPageState extends State<CreatePostPage> {
   String imageUrl = "";
   String url = "";
 
-
-  Future<void> _getImage(ImageSource source) async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: source);
-    if (image != null) {
-        setState(() {
-          url = image.path;
-        });
-      // reference to the firebase storage
-      Reference ref = FirebaseStorage.instance.ref().child('images');
-
-      // reference to the image file
-      //make unique image name
-      String uniqueName = DateTime.now().millisecondsSinceEpoch.toString();
-
-      Reference file = ref.child(uniqueName);
-
-      // uploading the image
-      await file.putFile(File(image.path));
-
-      // getting the image url
-      imageUrl = await file.getDownloadURL();
-
-      print(imageUrl);
-    }
-  }
-
   @override
   void initState() {
     _isRecipe = false;
     _isCommunityPost = true;
     super.initState();
+  }
+
+  void _setImageUrl(String url){
+    setState(() {
+      imageUrl = url;
+    });
+  }
+
+  void _setUrl(String path){
+    setState(() {
+      url = path;
+    });
   }
 
   void _onSavePressed(){
@@ -157,29 +143,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
           ),
           const Text("Add Picture.", style: TextStyle(color: Colors.black54, fontSize: 20)),
           // camera and gallery icon button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              IconButton(
-                onPressed: () async {
-                  await _getImage(ImageSource.camera);
-                  // this is the image url store it in the community post or recipe post
-                  print(imageUrl);
-
-                },
-                icon: const Icon(Icons.camera_alt, color: Colors.black, size: 35),
-              ),
-              IconButton(
-                onPressed: () async{
-                  await _getImage(ImageSource.gallery);
-                  // this is the image url store it in the community post or recipe post
-                  print(imageUrl);
-                },
-                icon: const Icon(Icons.photo, color: Colors.black, size: 35),
-              ),
-            ],
-          ),
-          if(url != "")Container(
+          FilePicker(_setImageUrl, _setUrl),
+          if(url.isNotEmpty)Container(
             height: 400.0,
             color: Colors.grey,
             child: Image.file(File(url), fit: BoxFit.cover, width: double.infinity),
