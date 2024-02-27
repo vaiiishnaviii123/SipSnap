@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view/comment_drawer.dart';
@@ -32,11 +31,20 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 1. Photo of the post
-          Container(
+          if(widget.post.imageRef.isNotEmpty)Container(
               height: 200.0, // Adjust the height as needed
               width: double.infinity,
               color: Colors.grey, // Placeholder color
-              child: Image.network(widget.post.imageRef, fit: BoxFit.cover, width: double.infinity),
+              child: Image.network(
+                  widget.post.imageRef,
+                  errorBuilder:(BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return Center(
+                        child: Text('😢 No image found.', style: TextStyle(color: Colors.white, fontSize: 20),
+                        )
+                    );
+                  },
+                  fit: BoxFit.cover,
+                  width: double.infinity),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -51,6 +59,9 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
                 // Username
                 Text(widget.post.username!),
                 // Likes button and comments section
+                const SizedBox(height: 8.0),
+                // Description
+                Text(widget.post.description),
                 Row(
                   children: [
                     IconButton(
@@ -82,9 +93,6 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8.0),
-                // Description
-                Text(widget.post.description),
               ],
             ),
           ),
