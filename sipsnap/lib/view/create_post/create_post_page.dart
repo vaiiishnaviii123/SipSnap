@@ -1,18 +1,14 @@
-import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view/create_post/file_picker.dart';
-import 'package:sipsnap/view_model/community_posts_provider.dart';
 import '../../models/recipe_posts_model.dart';
 import '../../router.dart';
 import '../../view_model/community_database_service.dart';
 import '../../view_model/recipe_database_service.dart';
 import '../../view_model/recipe_posts_provider.dart';
 import '../../view_model/user_provider.dart';
+import 'dart:io';
 
 class CreatePostPage extends StatefulWidget {
    const CreatePostPage({super.key});
@@ -94,7 +90,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
         body: SingleChildScrollView(
         child: Wrap(
         //crossAxisAlignment: CrossAxisAlignment.start,
-          runSpacing:7,
+          runSpacing:20,
         children: [
           Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +144,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
           ),
           const Text("Add Picture.", style: TextStyle(color: Colors.black54, fontSize: 20)),
           // camera and gallery icon button
-          FilePicker(_setImageUrl, _setUrl),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child:  FilePicker(_setImageUrl, _setUrl),
+          ),
           if(url.isNotEmpty)Container(
             height: 400.0,
             color: Colors.grey,
@@ -163,7 +165,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               alignLabelWithHint: true,
-              labelText: "Enter description here."
+              labelText: "Enter here."
             ),
             // The validator receives the text that the user has entered.
             validator: (value) {
