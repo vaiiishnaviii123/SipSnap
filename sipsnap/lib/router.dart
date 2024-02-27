@@ -5,7 +5,7 @@ import 'package:sipsnap/view/create_post/Create_post_page.dart';
 import 'package:sipsnap/view/login_register/login_page.dart';
 import 'package:sipsnap/view/profile_views/profile_page.dart';
 import 'package:sipsnap/view/recipe_views/recipe_posts_page.dart';
-import 'package:sipsnap/view/screens.dart';
+import 'package:sipsnap/view/common_widgets/screens.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
