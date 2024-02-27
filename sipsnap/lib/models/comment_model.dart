@@ -1,5 +1,5 @@
 class Comment {
-  final String text;
+  final String comment;
 
-  Comment(this.text);
+  Comment(this.comment);
 }

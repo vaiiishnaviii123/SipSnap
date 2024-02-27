@@ -17,6 +17,7 @@ class _CommentDrawerState extends State<CommentDrawer> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
+    Provider.of<CommentProvider>(context, listen: false).retrieveComments();
   }
 
   @override
@@ -39,7 +40,7 @@ class _CommentDrawerState extends State<CommentDrawer> {
                       return Card(
                         color: cardColor,
                         child: ListTile(
-                          title: Text(commentProvider.comments[index].text),
+                          title: Text(commentProvider.comments[index].comment),
                         ),
                       );
                     },
@@ -62,13 +63,13 @@ class _CommentDrawerState extends State<CommentDrawer> {
                   const SizedBox(width: 16.0),
                   GestureDetector(
                     onTap: () {
-                      final String commentText = _controller.text.trim();
+                      final String comment = _controller.text.trim();
                       const String username = "sample_username";
-                      if (commentText.isNotEmpty) {
+                      if (comment.isNotEmpty) {
                         final CommentProvider commentProvider =
                             Provider.of<CommentProvider>(context,
                                 listen: false);
-                        commentProvider.addComment(commentText, username);
+                        commentProvider.addComment(comment, username);
                         _controller.clear();
                       }
                     },

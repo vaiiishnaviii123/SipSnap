@@ -8,21 +8,38 @@ class CommentProvider extends ChangeNotifier {
 
   List<Comment> get comments => _comments;
 
-  Future<void> addComment(String commentText, String username) async {
+  Future<void> addComment(String comment, String username) async {
     try {
       // Add comment locally
-      _comments.add(Comment(commentText));
+      _comments.add(Comment(comment));
       notifyListeners();
 
       // Send comment data to Firestore
       await _firestore.collection('comments').add({
-        'commentText': commentText,
+        'comment': comment,
         'username': username,
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
       // Handle error
       print('Error adding comment: $e');
+    }
+  }
+
+  Future<void> retrieveComments() async {
+    try {
+      QuerySnapshot querySnapshot =
+          await _firestore.collection('comments').get();
+
+      _comments.addAll(querySnapshot.docs.map((doc) {
+        return Comment(
+          doc['comment'],
+        );
+      }));
+
+      notifyListeners();
+    } catch (e) {
+      print('Error retrieving comments: $e');
     }
   }
 }
