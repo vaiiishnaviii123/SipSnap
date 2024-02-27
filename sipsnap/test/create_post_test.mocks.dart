@@ -46,10 +46,10 @@ class MockCommunityPostsProvider extends _i1.Mock
       ) as bool);
 
   @override
-  void addCommunityPost(_i3.CommunityPost? post) => super.noSuchMethod(
+  void setCommunityPosts(List<_i3.CommunityPost>? posts) => super.noSuchMethod(
         Invocation.method(
-          #addCommunityPost,
-          [post],
+          #setCommunityPosts,
+          [posts],
         ),
         returnValueForMissingStub: null,
       );
@@ -113,13 +113,22 @@ class MockRecipePostsProvider extends _i1.Mock
       ) as bool);
 
   @override
-  void addRecipePost(_i6.RecipePost? post) => super.noSuchMethod(
+  void setRecipePosts(List<_i6.RecipePost>? posts) => super.noSuchMethod(
         Invocation.method(
-          #addRecipePost,
-          [post],
+          #setRecipePosts,
+          [posts],
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  List<_i6.RecipePost> getRecipePosts() => (super.noSuchMethod(
+        Invocation.method(
+          #getRecipePosts,
+          [],
+        ),
+        returnValue: <_i6.RecipePost>[],
+      ) as List<_i6.RecipePost>);
 
   @override
   void addListener(_i4.VoidCallback? listener) => super.noSuchMethod(
