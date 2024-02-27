@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
-import 'package:sipsnap/view/community_views/comment_drawer.dart';
+import 'package:sipsnap/view/comment_drawer.dart';
 
 class CommunityPostCard extends StatefulWidget {
   final CommunityPost post;

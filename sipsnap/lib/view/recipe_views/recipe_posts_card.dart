@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sipsnap/models/recipe_posts_model.dart';
-import 'package:sipsnap/view/community_views/comment_drawer.dart';
+import 'package:sipsnap/view/comment_drawer.dart';
 
 class RecipePostCard extends StatefulWidget {
   final RecipePost post;
