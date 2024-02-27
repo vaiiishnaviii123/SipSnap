@@ -65,7 +65,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
         userName: userName,
         description: descriptionController.text,
       );
-      context.read<RecipePostsProvider>().addRecipePost(recipePost);
       recipeDatabase.addRecipe(recipePost);
     }else{
       CommunityPost communityPost = CommunityPost(
@@ -74,7 +73,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
         username: userName,
         description: descriptionController.text,
       );
-      context.read<CommunityPostsProvider>().addCommunityPost(communityPost);
       communityDatabase.addCommunityPost(communityPost);
     }
     titleController.clear();

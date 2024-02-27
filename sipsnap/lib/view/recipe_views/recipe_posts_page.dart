@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sipsnap/view_model/recipe_database_service.dart';
 import 'package:sipsnap/view_model/recipe_posts_provider.dart';
 import 'package:sipsnap/view/recipe_views/recipe_posts_card.dart';
 
@@ -8,20 +9,24 @@ class RecipePostsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => RecipePostsProvider(),
-      child: Scaffold(
-        body: Consumer<RecipePostsProvider>(
-          builder: (context, recipePostsProvider, _) {
-            return ListView.builder(
-              itemCount: recipePostsProvider.recipePosts.length,
-              itemBuilder: (context, index) {
-                var post = recipePostsProvider.recipePosts[index];
-                return RecipePostCard(post: post);
-              },
-            );
-          },
-        ),
+    final recipeProvider = Provider.of<RecipePostsProvider>(context);
+
+    // Fetch community posts when the page is built
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await RecipeDatabase().fetchRecipePosts(recipeProvider);
+    });
+
+    return Scaffold(
+      body: Consumer<RecipePostsProvider>(
+        builder: (context, recipePostsProvider, _) {
+          return ListView.builder(
+            itemCount: recipePostsProvider.recipePosts.length,
+            itemBuilder: (context, index) {
+              var post = recipePostsProvider.recipePosts[index];
+              return RecipePostCard(post: post);
+            },
+          );
+        },
       ),
     );
   }

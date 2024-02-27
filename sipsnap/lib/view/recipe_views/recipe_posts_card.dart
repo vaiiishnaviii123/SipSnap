@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sipsnap/models/recipe_posts_model.dart';
 import 'package:sipsnap/view/comment_drawer.dart';
+import 'package:sipsnap/view_model/comment_provider.dart';
 
 class RecipePostCard extends StatefulWidget {
   final RecipePost post;
@@ -30,11 +32,20 @@ class _RecipePostCardState extends State<RecipePostCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 1. Photo of the post
-          Container(
-            height: 200.0,
+          if(widget.post.imageRef.isNotEmpty)Container(
+            height: 200.0, // Adjust the height as needed
             width: double.infinity,
-            color: Colors.grey,
-            child: Image.asset(widget.post.imageRef, fit: BoxFit.cover),
+            color: Colors.grey, // Placeholder color
+            child: Image.network(
+                widget.post.imageRef,
+                errorBuilder:(BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return Center(
+                      child: Text('😢 No image found.', style: TextStyle(color: Colors.white, fontSize: 20),
+                      )
+                  );
+                },
+                fit: BoxFit.cover,
+                width: double.infinity),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -48,6 +59,9 @@ class _RecipePostCardState extends State<RecipePostCard> {
                 ),
                 // Chef's name
                 Text(widget.post.userName!),
+                const SizedBox(height: 8.0),
+                // Description
+                Text(widget.post.description),
                 // Likes button and comments section
                 Row(
                   children: [
@@ -78,11 +92,9 @@ class _RecipePostCardState extends State<RecipePostCard> {
                         );
                       },
                     ),
+                    Text('Comments: ${ context.read<CommentProvider>().comments.length}'),
                   ],
                 ),
-                const SizedBox(height: 8.0),
-                // Description
-                Text(widget.post.description),
               ],
             ),
           ),
