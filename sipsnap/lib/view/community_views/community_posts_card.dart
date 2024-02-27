@@ -46,7 +46,7 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 // Username
-                Text(widget.post.username),
+                Text(widget.post.username!),
                 // Likes button and comments section
                 Row(
                   children: [

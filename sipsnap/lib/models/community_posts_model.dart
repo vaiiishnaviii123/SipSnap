@@ -1,6 +1,6 @@
 class CommunityPost {
   final String postTitle;
-  final String username;
+  final String? username;
   final String description;
   final String imageRef;
 

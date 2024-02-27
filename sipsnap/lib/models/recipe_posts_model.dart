@@ -1,6 +1,6 @@
 class RecipePost {
   final String recipeTitle;
-  final String userName;
+  final String? userName;
   final String description;
   final String imageRef;
 
