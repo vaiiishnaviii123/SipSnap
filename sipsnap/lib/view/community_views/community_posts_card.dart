@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view/comment_drawer.dart';
@@ -34,7 +36,8 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
               height: 200.0, // Adjust the height as needed
               width: double.infinity,
               color: Colors.grey, // Placeholder color
-              child: Image.asset(widget.post.imageRef, fit: BoxFit.cover)),
+              child: Image.network(widget.post.imageRef, fit: BoxFit.cover, width: double.infinity),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
