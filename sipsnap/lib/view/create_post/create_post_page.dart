@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view/create_post/file_picker.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 import '../../models/recipe_posts_model.dart';
+import '../../router.dart';
 import '../../view_model/community_database_service.dart';
 import '../../view_model/recipe_database_service.dart';
 import '../../view_model/recipe_posts_provider.dart';
@@ -78,6 +80,11 @@ class _CreatePostPageState extends State<CreatePostPage> {
     titleController.clear();
     descriptionController.clear();
     url = "";
+    if(_isRecipe){
+      goRouter.go('/recipe');
+    }else{
+      goRouter.go('/community');
+    }
   }
 
   @override
