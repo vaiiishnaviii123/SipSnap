@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 
 class CommunityPostsProvider extends ChangeNotifier {
-  final List<CommunityPost> _communityPosts = [
+  List<CommunityPost> _communityPosts = [
     CommunityPost(
       postTitle: 'Capitol Hill Boba Event',
       username: 'Shawn_56',
@@ -18,6 +18,11 @@ class CommunityPostsProvider extends ChangeNotifier {
   ];
 
   List<CommunityPost> get communityPosts => _communityPosts;
+
+  void setCommunityPosts(List<CommunityPost> posts) {
+    _communityPosts = posts;
+    notifyListeners();
+  }
 
   void addCommunityPost(CommunityPost post) {
     _communityPosts.add(post);
