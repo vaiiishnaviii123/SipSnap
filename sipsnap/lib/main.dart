@@ -36,7 +36,7 @@ Future<void> main() async {
               ChangeNotifierProvider(create: (context) => RecipePostsProvider()),
               ChangeNotifierProvider(create: (context) => CommunityPostsProvider()),
               ChangeNotifierProvider(create: (context) => UserProvider()),
-              ChangeNotifierProvider(create: (context) => CommentProvider()),
+              ChangeNotifierProvider(create: (context) => CommentProvider(db)),
               Provider(create: (context)=>CommunityDatabase(db)),
               Provider(create: (context)=>RecipeDatabase(db)),
             ],
