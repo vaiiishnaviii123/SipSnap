@@ -95,7 +95,7 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
                         showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
-                            return const CommentDrawer();
+                            return CommentDrawer(controller: TextEditingController());
                           },
                         );
                       },
