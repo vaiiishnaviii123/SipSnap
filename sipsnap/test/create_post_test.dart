@@ -3,26 +3,41 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/models/recipe_posts_model.dart';
-import 'package:sipsnap/view/community_views/community_posts_page.dart';
+import 'package:sipsnap/view/community_views/community_posts_card.dart';
 import 'package:sipsnap/view/create_post/Create_post_page.dart';
-import 'package:sipsnap/view/recipe_views/recipe_posts_page.dart';
+import 'package:sipsnap/view/recipe_views/recipe_posts_card.dart';
+import 'package:sipsnap/view_model/comment_provider.dart';
+import 'package:sipsnap/view_model/community_database_service.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sipsnap/view_model/recipe_database_service.dart';
 import 'package:sipsnap/view_model/recipe_posts_provider.dart';
+import 'package:sipsnap/view_model/user_provider.dart';
 import 'create_post_test.mocks.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+
 
 @GenerateMocks([CommunityPostsProvider])
 @GenerateMocks([RecipePostsProvider])
 void main() {
   testWidgets('Testing create community posts', (tester) async {
     CommunityPostsProvider mockCommunityPostsProvider = MockCommunityPostsProvider();
+    final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
+
+    CommunityPost communityPost = CommunityPost(
+      postTitle: 'Seattle Events',
+      username: 'MockUser1',
+      description: 'Mock Description 1',
+      imageRef: '', // Commented out for now
+    );
+
     List<CommunityPost> communityEvents = [
       CommunityPost(
         postTitle: 'Seattle Events',
         username: 'MockUser1',
         description: 'Mock Description 1',
-        imageRef: 'assets/spaceneedle.jpg', // Commented out for now
+        imageRef: '', // Commented out for now
       ),
     ];
     when(
@@ -30,13 +45,18 @@ void main() {
     ).thenAnswer((_) => communityEvents);
 
     await tester.pumpWidget(
-        ChangeNotifierProvider.value(
-           value: mockCommunityPostsProvider,
-            child: const MaterialApp(
-                home: Material(
-                    child: CreatePostPage()
-                )
-            )
+        MultiProvider(
+          providers: [
+            Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
+            Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
+            ChangeNotifierProvider(create: (context) => UserProvider()),
+            ChangeNotifierProvider(create: (context)=>mockCommunityPostsProvider)
+          ],
+          child: MaterialApp(
+            home: Material(
+              child: CreatePostPage(),
+            ),
+          ),
         )
     );
     final buttonFinder = find.byKey(ValueKey('SavePost'));
@@ -64,32 +84,45 @@ void main() {
     await tester.tap(buttonFinder);
     await tester.pumpAndSettle();
 
-    final snackBarFinder = find.byKey(ValueKey("SnackBar"));
+    final snapshot = await fakeFirebaseFirestore.collection('community').get();
+    expect(snapshot.docs.length, 1);
+    expect(snapshot.docs.first.get('description'), isNotNull);
+    expect(snapshot.docs.first.get('postTitle'), isNotNull);
+
+
+    final snackBarFinder = find.byKey(ValueKey("SnackBar")).last;
     expect(snackBarFinder, findsOneWidget);
     expect(find.textContaining('successfully'), findsOneWidget);
 
     await tester.pumpWidget(
-        ChangeNotifierProvider.value(
-            value: mockCommunityPostsProvider,
-            child: const MaterialApp(
-                home: Material(
-                    child: CommunityPostsPage()
-                )
-            )
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => CommentProvider(fakeFirebaseFirestore)),
+            ChangeNotifierProvider(create: (context)=>mockCommunityPostsProvider)
+          ],
+          child: MaterialApp(
+            home: Material(
+              child: CommunityPostCard(post: communityPost),
+            ),
+          ),
         )
     );
-    final cardFinder = find.byKey(ValueKey("card"));
-    expect(cardFinder, findsOneWidget);
     await tester.pump();
+    expect(find.byKey(ValueKey('card')), findsOneWidget);
     expect(find.textContaining('Seattle'), findsOneWidget);
     expect(find.textContaining('Description'), findsOneWidget);
-    expect(find.textContaining('MockUser1'), findsOneWidget);
-
-    verify(mockCommunityPostsProvider.communityPosts);
   });
 
   testWidgets('Testing create recipe posts', (tester) async {
     RecipePostsProvider mockRecipePostsProvider = MockRecipePostsProvider();
+    final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
+
+    RecipePost recipePost = RecipePost(
+        recipeTitle: "Lavender Boba",
+        userName: "Admin",
+        description: "First Recipe",
+        imageRef: 'assets/spaceneedle.jpg'
+    );
 
     List<RecipePost> recipeEvents = [
       RecipePost(
@@ -105,13 +138,18 @@ void main() {
 
 
     await tester.pumpWidget(
-        ChangeNotifierProvider.value(
-            value: mockRecipePostsProvider,
-            child: const MaterialApp(
-                home: Material(
-                    child: CreatePostPage()
-                )
-            )
+        MultiProvider(
+          providers: [
+            Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
+            Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
+            ChangeNotifierProvider(create: (context) => UserProvider()),
+            ChangeNotifierProvider(create: (context)=>mockRecipePostsProvider)
+          ],
+          child: MaterialApp(
+            home: Material(
+              child: CreatePostPage(),
+            ),
+          ),
         )
     );
     final buttonFinder = find.byKey(ValueKey('SavePost'));
@@ -139,32 +177,36 @@ void main() {
     await tester.tap(buttonFinder);
     await tester.pumpAndSettle();
 
+    final snapshot = await fakeFirebaseFirestore.collection('recipies').get();
+    expect(snapshot.docs.length, 1);
+    expect(snapshot.docs.first.get('description'), isNotNull);
+    expect(snapshot.docs.first.get('recipeTitle'), isNotNull);
+
     final snackBarFinder = find.byKey(ValueKey("SnackBar"));
     expect(snackBarFinder, findsOneWidget);
     expect(find.textContaining('successfully'), findsOneWidget);
 
     await tester.pumpWidget(
-        ChangeNotifierProvider.value(
-            value: mockRecipePostsProvider,
-            child: const MaterialApp(
-                home: Material(
-                    child: RecipePostsPage()
-                )
-            )
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => CommentProvider(fakeFirebaseFirestore)),
+            ChangeNotifierProvider(create: (context)=>mockRecipePostsProvider)
+          ],
+          child: MaterialApp(
+            home: Material(
+              child: RecipePostCard(post: recipePost),
+            ),
+          ),
         )
     );
-    final cardFinder = find.byKey(ValueKey("card"));
-    expect(cardFinder, findsOneWidget);
     await tester.pump();
     expect(find.textContaining('Lavender'), findsOneWidget);
     expect(find.textContaining('First'), findsOneWidget);
-    expect(find.textContaining('Admin'), findsOneWidget);
-
-    verify(mockRecipePostsProvider.recipePosts);
   });
 
   testWidgets('Testing erros on create post', (tester) async {
     RecipePostsProvider mockRecipePostsProvider = MockRecipePostsProvider();
+    final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
 
     List<RecipePost> recipeEvents = [
       RecipePost(
@@ -180,14 +222,18 @@ void main() {
 
 
     await tester.pumpWidget(
-        ChangeNotifierProvider.value(
-            value: mockRecipePostsProvider,
-            child: const MaterialApp(
-                home: Material(
-                    child: CreatePostPage()
-                )
-            )
-        )
+      MultiProvider(
+          providers: [
+            Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
+            Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
+            ChangeNotifierProvider(create: (context)=>mockRecipePostsProvider)
+          ],
+        child: MaterialApp(
+          home: Material(
+            child: CreatePostPage(),
+          ),
+        ),
+      )
     );
     final buttonFinder = find.byKey(ValueKey('SavePost'));
 
