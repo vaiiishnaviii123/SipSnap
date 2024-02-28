@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
@@ -8,7 +6,6 @@ import '../../models/recipe_posts_model.dart';
 import '../../router.dart';
 import '../../view_model/community_database_service.dart';
 import '../../view_model/recipe_database_service.dart';
-import '../../view_model/recipe_posts_provider.dart';
 import '../../view_model/user_provider.dart';
 import 'dart:io';
 
