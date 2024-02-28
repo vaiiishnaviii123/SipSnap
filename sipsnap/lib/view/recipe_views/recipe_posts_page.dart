@@ -13,7 +13,7 @@ class RecipePostsPage extends StatelessWidget {
 
     // Fetch community posts when the page is built
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await RecipeDatabase().fetchRecipePosts(recipeProvider);
+      await  context.read<RecipeDatabase>().fetchRecipePosts(recipeProvider);
     });
 
     return Scaffold(

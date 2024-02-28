@@ -3,8 +3,13 @@ import 'package:sipsnap/view_model/community_posts_provider.dart';
 import '../models/community_posts_model.dart';
 
 class CommunityDatabase {
-  final CollectionReference communityCollection =
-      FirebaseFirestore.instance.collection('community');
+  late FirebaseFirestore database;
+  late CollectionReference communityCollection;
+
+  CommunityDatabase(FirebaseFirestore db){
+    database = db;
+    communityCollection = database.collection('community');
+  }
 
   Future addCommunityPost(CommunityPost communityPost) async {
     return await communityCollection.add({

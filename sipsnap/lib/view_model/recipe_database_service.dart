@@ -3,8 +3,13 @@ import 'package:sipsnap/view_model/recipe_posts_provider.dart';
 import '../models/recipe_posts_model.dart';
 
 class RecipeDatabase{
+  late FirebaseFirestore database;
+  late CollectionReference recipeCollection;
 
-  final CollectionReference recipeCollection = FirebaseFirestore.instance.collection('recipies');
+  RecipeDatabase(FirebaseFirestore db){
+     database = db;
+     recipeCollection = database.collection('recipies');
+  }
 
   Future addRecipe(RecipePost recipePostModal) async {
     return await recipeCollection.add({

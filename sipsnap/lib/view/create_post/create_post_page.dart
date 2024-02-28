@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
@@ -27,8 +29,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
   String message = "Community event Title";
   List<String> list = <String>['Community Post', 'Recipe Post'];
   String dropdownValue = "";
-  RecipeDatabase recipeDatabase = new RecipeDatabase();
-  CommunityDatabase communityDatabase = new CommunityDatabase();
   // image url for the image uploaded
   String imageUrl = "";
   String url = "";
@@ -52,33 +52,36 @@ class _CreatePostPageState extends State<CreatePostPage> {
     });
   }
 
-  void _onSavePressed(){
-    String? userName =  context.read<UserProvider>().currentUser?.name;
-    if(_isRecipe){
+  void _onSavePressed() {
+    String? userName = context
+        .read<UserProvider>()
+        .currentUser
+        ?.name;
+    if (_isRecipe) {
       RecipePost recipePost = RecipePost(
         imageRef: imageUrl,
         recipeTitle: titleController.text,
         userName: userName,
         description: descriptionController.text,
       );
-      recipeDatabase.addRecipe(recipePost);
-    }else{
+      context.read<RecipeDatabase>().addRecipe(recipePost);
+    } else {
       CommunityPost communityPost = CommunityPost(
         imageRef: imageUrl,
         postTitle: titleController.text,
         username: userName,
         description: descriptionController.text,
       );
-      communityDatabase.addCommunityPost(communityPost);
+      context.read<CommunityDatabase>().addCommunityPost(communityPost);
     }
     titleController.clear();
     descriptionController.clear();
     url = "";
-    imageUrl= "";
-    if(_isRecipe){
-      goRouter.go('/recipe');
-    }else{
-      goRouter.go('/community');
+    imageUrl = "";
+    if (_isRecipe) {
+        goRouter.go('/recipe');
+    } else {
+        goRouter.go('/community');
     }
   }
 
