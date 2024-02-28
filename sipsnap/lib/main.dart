@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sipsnap/router.dart';
 import 'package:sipsnap/view_model/comment_provider.dart';
+import 'package:sipsnap/view_model/community_database_service.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
+import 'package:sipsnap/view_model/recipe_database_service.dart';
 import 'package:sipsnap/view_model/recipe_posts_provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +21,7 @@ Future<void> main() async {
   // this displays the splash screen for a few seconds before the app starts
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   runApp(
     // use this future builder to load all the data from DB before the app starts until then it will display the splash screen
@@ -33,6 +37,8 @@ Future<void> main() async {
               ChangeNotifierProvider(create: (context) => CommunityPostsProvider()),
               ChangeNotifierProvider(create: (context) => UserProvider()),
               ChangeNotifierProvider(create: (context) => CommentProvider()),
+              Provider(create: (context)=>CommunityDatabase(db)),
+              Provider(create: (context)=>RecipeDatabase(db)),
             ],
             child: const MyApp(),
           );

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
 import 'package:sipsnap/view/common_widgets/comment_drawer.dart';
-
 import '../../view_model/comment_provider.dart';
-import '../../view_model/user_provider.dart';
 
 class CommunityPostCard extends StatefulWidget {
   final CommunityPost post;
@@ -27,7 +25,6 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
     return Card(
       key: const Key("card"),
       margin: const EdgeInsets.all(8.0),

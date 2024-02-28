@@ -13,13 +13,14 @@ class CommunityPostsPage extends StatelessWidget {
 
     // Fetch community posts when the page is built
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await CommunityDatabase().fetchCommunityPosts(communityProvider);
+      await context.read<CommunityDatabase>().fetchCommunityPosts(communityProvider);
     });
 
     return Scaffold(
       body: Consumer<CommunityPostsProvider>(
         builder: (context, communityPostsProvider, _) {
           return ListView.builder(
+            key: ValueKey('list'),
             itemCount: communityPostsProvider.communityPosts.length,
             itemBuilder: (context, index) {
               var post = communityPostsProvider.communityPosts[index];
