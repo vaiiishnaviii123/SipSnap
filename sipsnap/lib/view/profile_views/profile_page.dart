@@ -27,7 +27,15 @@ class ProfilePage extends StatelessWidget {
             ClipOval(
               child: SizedBox.fromSize(
                 size: Size.fromRadius(48), // Image radius
-                child: Image.network(userProvider.currentUser?.photoUrl ?? '',fit: BoxFit.cover,),
+                child: Image.network(userProvider.currentUser?.photoUrl ?? '',
+                  fit: BoxFit.cover,
+                  errorBuilder:(BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return Center(
+                        child: Text('😢 No image found.', style: TextStyle(color: Colors.white, fontSize: 20),
+                        )
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 15.0),
