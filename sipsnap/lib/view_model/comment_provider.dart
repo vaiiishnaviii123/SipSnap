@@ -4,7 +4,11 @@ import 'package:sipsnap/models/comment_model.dart';
 
 class CommentProvider extends ChangeNotifier {
   final List<Comment> _comments = [];
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  late FirebaseFirestore _firestore;
+
+  CommentProvider(FirebaseFirestore db){
+    _firestore = db;
+  }
 
   List<Comment> get comments => _comments;
 
