@@ -171,6 +171,7 @@ void main() {
     expect(find.textContaining('First'), findsOneWidget);
   });
 
+
   testWidgets('Testing erros on create post', (tester) async {
     final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
 
