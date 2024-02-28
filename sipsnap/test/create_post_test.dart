@@ -9,20 +9,13 @@ import 'package:sipsnap/view/recipe_views/recipe_posts_card.dart';
 import 'package:sipsnap/view_model/comment_provider.dart';
 import 'package:sipsnap/view_model/community_database_service.dart';
 import 'package:sipsnap/view_model/community_posts_provider.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:sipsnap/view_model/recipe_database_service.dart';
 import 'package:sipsnap/view_model/recipe_posts_provider.dart';
 import 'package:sipsnap/view_model/user_provider.dart';
-import 'create_post_test.mocks.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
-
-@GenerateMocks([CommunityPostsProvider])
-@GenerateMocks([RecipePostsProvider])
 void main() {
   testWidgets('Testing create community posts', (tester) async {
-    CommunityPostsProvider mockCommunityPostsProvider = MockCommunityPostsProvider();
     final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
 
     CommunityPost communityPost = CommunityPost(
@@ -32,25 +25,13 @@ void main() {
       imageRef: '', // Commented out for now
     );
 
-    List<CommunityPost> communityEvents = [
-      CommunityPost(
-        postTitle: 'Seattle Events',
-        username: 'MockUser1',
-        description: 'Mock Description 1',
-        imageRef: '', // Commented out for now
-      ),
-    ];
-    when(
-        mockCommunityPostsProvider.communityPosts
-    ).thenAnswer((_) => communityEvents);
-
     await tester.pumpWidget(
         MultiProvider(
           providers: [
             Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
             Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
             ChangeNotifierProvider(create: (context) => UserProvider()),
-            ChangeNotifierProvider(create: (context)=>mockCommunityPostsProvider)
+            ChangeNotifierProvider(create: (context)=>CommunityPostsProvider())
           ],
           child: MaterialApp(
             home: Material(
@@ -98,7 +79,7 @@ void main() {
         MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => CommentProvider(fakeFirebaseFirestore)),
-            ChangeNotifierProvider(create: (context)=>mockCommunityPostsProvider)
+            ChangeNotifierProvider(create: (context)=>CommunityPostsProvider())
           ],
           child: MaterialApp(
             home: Material(
@@ -114,7 +95,6 @@ void main() {
   });
 
   testWidgets('Testing create recipe posts', (tester) async {
-    RecipePostsProvider mockRecipePostsProvider = MockRecipePostsProvider();
     final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
 
     RecipePost recipePost = RecipePost(
@@ -124,26 +104,13 @@ void main() {
         imageRef: 'assets/spaceneedle.jpg'
     );
 
-    List<RecipePost> recipeEvents = [
-      RecipePost(
-          recipeTitle: "Lavender Boba",
-          userName: "Admin",
-          description: "First Recipe",
-          imageRef: 'assets/spaceneedle.jpg')
-    ];
-
-    when(
-        mockRecipePostsProvider.recipePosts
-    ).thenAnswer((_) => recipeEvents);
-
-
     await tester.pumpWidget(
         MultiProvider(
           providers: [
             Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
             Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
             ChangeNotifierProvider(create: (context) => UserProvider()),
-            ChangeNotifierProvider(create: (context)=>mockRecipePostsProvider)
+            ChangeNotifierProvider(create: (context)=>RecipePostsProvider())
           ],
           child: MaterialApp(
             home: Material(
@@ -190,7 +157,7 @@ void main() {
         MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context) => CommentProvider(fakeFirebaseFirestore)),
-            ChangeNotifierProvider(create: (context)=>mockRecipePostsProvider)
+            ChangeNotifierProvider(create: (context)=>RecipePostsProvider())
           ],
           child: MaterialApp(
             home: Material(
@@ -205,28 +172,14 @@ void main() {
   });
 
   testWidgets('Testing erros on create post', (tester) async {
-    RecipePostsProvider mockRecipePostsProvider = MockRecipePostsProvider();
     final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
-
-    List<RecipePost> recipeEvents = [
-      RecipePost(
-          recipeTitle: "Lavender Boba",
-          userName: "Admin",
-          description: "First Recipe",
-          imageRef: 'assets/spaceneedle.jpg')
-    ];
-
-    when(
-        mockRecipePostsProvider.recipePosts
-    ).thenAnswer((_) => recipeEvents);
-
 
     await tester.pumpWidget(
       MultiProvider(
           providers: [
             Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
             Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
-            ChangeNotifierProvider(create: (context)=>mockRecipePostsProvider)
+            ChangeNotifierProvider(create: (context)=>RecipePostsProvider())
           ],
         child: MaterialApp(
           home: Material(
