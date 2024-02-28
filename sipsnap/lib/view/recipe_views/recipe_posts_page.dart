@@ -20,6 +20,7 @@ class RecipePostsPage extends StatelessWidget {
       body: Consumer<RecipePostsProvider>(
         builder: (context, recipePostsProvider, _) {
           return ListView.builder(
+            key: ValueKey('list'),
             itemCount: recipePostsProvider.recipePosts.length,
             itemBuilder: (context, index) {
               var post = recipePostsProvider.recipePosts[index];
