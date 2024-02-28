@@ -4,7 +4,8 @@ import 'package:sipsnap/models/comment_model.dart';
 import 'package:sipsnap/view_model/comment_provider.dart';
 
 class CommentDrawer extends StatefulWidget {
-  const CommentDrawer({Key? key}) : super(key: key);
+  const CommentDrawer({Key? key, required TextEditingController controller})
+      : super(key: key);
 
   @override
   _CommentDrawerState createState() => _CommentDrawerState();
