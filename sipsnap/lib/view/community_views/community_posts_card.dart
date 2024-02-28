@@ -25,6 +25,7 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       key: const Key("card"),
       margin: const EdgeInsets.all(8.0),

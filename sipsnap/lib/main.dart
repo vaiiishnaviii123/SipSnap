@@ -14,9 +14,10 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  );                                           
 
   // this displays the splash screen for a few seconds before the app starts
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

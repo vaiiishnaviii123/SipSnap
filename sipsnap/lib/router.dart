@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sipsnap/view/common_widgets/loading_page.dart';
 import 'package:sipsnap/view/community_views/community_posts_page.dart';
 import 'package:sipsnap/view/create_post/Create_post_page.dart';
 import 'package:sipsnap/view/login_register/login_page.dart';
@@ -11,10 +12,16 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 
 final goRouter = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/loading',
   navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   routes: [
+    GoRoute(
+      path: '/loading',
+      pageBuilder: (context, state) => NoTransitionPage(
+          child: LoadingPage()
+      ),
+    ),
     GoRoute(
       path: '/login',
       pageBuilder: (context, state) => const NoTransitionPage(
