@@ -1,96 +1,96 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sipsnap/models/user_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProvider extends ChangeNotifier {
-  List<UserModal>? _user;
   UserModal? _currentUser;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  List<UserModal>? get user => _user;
-
-  void setUser(List<UserModal> user) {
-    _user = user;
-    notifyListeners();
-  }
+  late StreamSubscription<User?> _authStateChangesSubscription;
+  late StreamController<UserModal?> _userStreamController;
 
   UserModal? get currentUser => _currentUser;
 
-  void setCurrentUser(UserModal user) {
-    _currentUser = user;
-    notifyListeners();
+  // Initialize the provider
+  UserProvider() {
+    _userStreamController = StreamController<UserModal?>();
+    _authStateChangesSubscription = _auth.authStateChanges().listen((User? user) {
+      if (user != null) {
+        // User is signed in
+        _currentUser = UserModal(
+          uuid: user.uid,
+          name: user.displayName ?? '',
+          email: user.email ?? '',
+          photoUrl: user.photoURL ?? '',
+        );
+      } else {
+        // User is signed out
+        _currentUser = null;
+      }
+      // Add the current user to the stream
+      _userStreamController.add(_currentUser);
+    });
   }
 
+  // Stream to listen for user authentication state changes
+  Stream<UserModal?> get userStream => _userStreamController.stream;
+
+  // Sign in with Google
   Future<void> signInWithGoogle() async {
-    // sign in with google
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
 
-    //sign in with google
-    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-
-    try{
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-
-        // create new credential
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
-
-        // sign in with credential
-        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-
-        // retrive the user info
+        final UserCredential userCredential = await _auth.signInWithCredential(credential);
         final User? user = userCredential.user;
-
         if (user != null) {
-         // create new user object
-          UserModal newUser = UserModal(
+          _currentUser = UserModal(
             uuid: user.uid,
-            name: user.displayName,
-            email: user.email,
-            photoUrl: user.photoURL,
+            name: user.displayName ?? '',
+            email: user.email ?? '',
+            photoUrl: user.photoURL ?? '',
           );
-
-          // set current user
-          setCurrentUser(newUser);
-
-          // add user to firestore
-          addUserToFirestore(newUser);
-
+          _userStreamController.add(_currentUser);
+          addUserToFirestore(_currentUser!);
         } else {
-          print("Failed to sign in with google.");
+          print("Failed to sign in with Google.");
         }
       }
-    }catch (e){
-      print("error caught: $e");
+    } catch (e) {
+      print("Error signing in with Google: $e");
     }
   }
 
+  // Sign out
+  Future<void> signOut() async {
+    try {
+      await _googleSignIn.signOut();
+      await _auth.signOut();
+      _currentUser = null;
+      _userStreamController.add(null);
+    } catch (e) {
+      print("Error signing out: $e");
+    }
+  }
+
+  // Add user to Firestore
   void addUserToFirestore(UserModal user) async {
     try {
-      // Reference to the Firestore collection named 'Users'
       CollectionReference usersCollection = FirebaseFirestore.instance.collection('Users');
-
-      // Add the user data to Firestore
       await usersCollection.doc(user.uuid).set(user.toMap());
-
       print('User added to Firestore successfully');
     } catch (e) {
       print('Error adding user to Firestore: $e');
-      // Handle the error appropriately (e.g., show error message to the user)
     }
   }
-
-  Future<void> signOut() async {
-    // sign out from google
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    await googleSignIn.signOut();
-    await FirebaseAuth.instance.signOut();
-    setCurrentUser(UserModal());
-    notifyListeners();
-  }
-
 }
