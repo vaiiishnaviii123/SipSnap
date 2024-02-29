@@ -101,7 +101,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
               key: const Key("Type"),
               initialSelection: list.first,
               controller: dropdownController,
-              requestFocusOnTap: true,
+              requestFocusOnTap: false,
               label: const Text('Select Post type'),
               onSelected: (String? value) {
                 setState(() {
