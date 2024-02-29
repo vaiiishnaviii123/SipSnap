@@ -1,3 +1,4 @@
+import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +16,10 @@ import 'package:sipsnap/view_model/user_provider.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
 void main() {
+
   testWidgets('Testing create community posts', (tester) async {
-    final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
+    FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
+    MockFirebaseAuth fakeFirebaseAuth = MockFirebaseAuth();
 
     CommunityPost communityPost = CommunityPost(
       postTitle: 'Seattle Events',
@@ -30,7 +33,7 @@ void main() {
           providers: [
             Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
             Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
-            ChangeNotifierProvider(create: (context) => UserProvider()),
+            ChangeNotifierProvider(create: (context) => UserProvider(fakeFirebaseAuth)),
             ChangeNotifierProvider(create: (context)=>CommunityPostsProvider())
           ],
           child: MaterialApp(
@@ -96,6 +99,7 @@ void main() {
 
   testWidgets('Testing create recipe posts', (tester) async {
     final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
+    MockFirebaseAuth mock = MockFirebaseAuth();
 
     RecipePost recipePost = RecipePost(
         recipeTitle: "Lavender Boba",
@@ -109,7 +113,7 @@ void main() {
           providers: [
             Provider(create: (context)=>CommunityDatabase(fakeFirebaseFirestore)),
             Provider(create: (context)=>RecipeDatabase(fakeFirebaseFirestore)),
-            ChangeNotifierProvider(create: (context) => UserProvider()),
+            ChangeNotifierProvider(create: (context) => UserProvider(mock)),
             ChangeNotifierProvider(create: (context)=>RecipePostsProvider())
           ],
           child: MaterialApp(

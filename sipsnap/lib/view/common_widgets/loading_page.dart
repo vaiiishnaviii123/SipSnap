@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sipsnap/router.dart';
 import 'package:sipsnap/view_model/user_provider.dart';
 
@@ -10,13 +11,11 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
-  final UserProvider _userProvider = UserProvider();
-
   @override
   void initState() {
     super.initState();
     // Listen for user authentication state changes
-    _userProvider.userStream.listen((user) {
+    context.read<UserProvider>().userStream.listen((user) {
       // If user is logged in, navigate to home screen
       if (user != null) {
         goRouter.go('/community');

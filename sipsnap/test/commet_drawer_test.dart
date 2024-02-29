@@ -9,7 +9,7 @@ void main() {
   testWidgets('CommentDrawer displays comments and adds new comment',
       (tester) async {
     // Create a FakeFirestore instance
-    final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
+     FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
 
     // Initialize the CommentProvider with the fake Firestore instance
     final CommentProvider commentProvider =

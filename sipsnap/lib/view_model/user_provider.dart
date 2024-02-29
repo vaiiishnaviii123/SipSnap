@@ -9,15 +9,15 @@ import 'package:sipsnap/models/user_model.dart';
 class UserProvider extends ChangeNotifier {
   UserModal? _currentUser;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  late FirebaseAuth _auth;
   late StreamSubscription<User?> _authStateChangesSubscription;
   late StreamController<UserModal?> _userStreamController;
 
   UserModal? get currentUser => _currentUser;
 
   // Initialize the provider
-  UserProvider() {
+  UserProvider(FirebaseAuth auth) {
+    _auth = auth;
     _userStreamController = StreamController<UserModal?>();
     _authStateChangesSubscription = _auth.authStateChanges().listen((User? user) {
       if (user != null) {
