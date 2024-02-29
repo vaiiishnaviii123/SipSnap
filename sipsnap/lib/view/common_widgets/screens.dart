@@ -45,31 +45,28 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(99,122,159, 1),
-        title: const Text('Sip Snap', style: TextStyle(color: Colors.white),),
-        iconTheme: IconThemeData(size: 20, color: Colors.white),
+        backgroundColor: Color.fromRGBO(253, 220, 198, 1),
+        title: const Text('Sip Snap', style: TextStyle(color: Colors.black),),
+        iconTheme: IconThemeData(size: 20, color: Colors.black),
       ),
       drawer: const CustomDrawer(),
       body: body,
       bottomNavigationBar: NavigationBar(
-        backgroundColor: Color.fromRGBO(99,122,159, 1),
-        indicatorColor: Colors.amber,
+        backgroundColor: Color.fromRGBO(253, 220, 198, 1),
+        indicatorColor: Colors.orangeAccent,
         selectedIndex: selectedIndex,
         destinations: const [
           NavigationDestination(
               label: 'Community',
-              icon: Icon(Icons.people, color: Colors.white,),
-          selectedIcon: Icon(Icons.people, color: Colors.black,)
+              icon: Icon(Icons.people, color: Colors.black,),
           ),
           NavigationDestination(
               label: 'Create',
-              icon: Icon(Icons.add,color: Colors.white,),
-            selectedIcon: Icon(Icons.add, color: Colors.black,)
+              icon: Icon(Icons.add,color: Colors.black,),
       ),
           NavigationDestination(
               label: 'Recipe',
-              icon: Icon(Icons.restaurant,color: Colors.white,),
-              selectedIcon: Icon(Icons.restaurant, color: Colors.black,)
+              icon: Icon(Icons.restaurant,color: Colors.black,),
           ),
         ],
         onDestinationSelected: onDestinationSelected,

@@ -10,11 +10,12 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
+      backgroundColor:  Color.fromRGBO(250, 238, 230,1),
       appBar: AppBar(
-        backgroundColor:  Colors.blueGrey,
-        title: const Text('Profile Page', style: TextStyle(color: Colors.white),),
+        backgroundColor:  Color.fromRGBO(253,220,198,1),
+        title: const Text('Profile Page', style: TextStyle(color: Colors.black),),
         leading: BackButton(
-          color: Colors.white,
+          color: Colors.black,
             onPressed: (){
               goRouter.go('/community');
             },

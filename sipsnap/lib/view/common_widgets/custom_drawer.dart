@@ -10,15 +10,15 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider userProvider = context.read<UserProvider>();
     return Drawer(
-      backgroundColor: Color.fromRGBO(201, 215, 221, 1),
+      backgroundColor: Color.fromRGBO(250, 238, 230,1),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Color.fromRGBO(99,122,159, 1),
+              color: Color.fromRGBO(253,220,198, 1),
             ),
-            child: Text('Sip Snap', style: TextStyle(color: Colors.white, fontSize: 30),),
+            child: Text('Sip Snap', style: TextStyle(color: Colors.black, fontSize: 30),),
           ),
 
           // add remove or change any of the ListTile widgets below

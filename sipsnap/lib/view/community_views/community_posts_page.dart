@@ -17,6 +17,7 @@ class CommunityPostsPage extends StatelessWidget {
     });
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(250, 238, 230, 1),
       body: Consumer<CommunityPostsProvider>(
         builder: (context, communityPostsProvider, _) {
           return ListView.builder(

@@ -88,6 +88,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
     return Form(
       key: _formKey,
       child: Scaffold(
+        backgroundColor: Color.fromRGBO(250, 238, 230, 1),
         body: SingleChildScrollView(
         child: Wrap(
         //crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,8 +127,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
                   }).toList(),
             ),
       ]),
-          if(_isRecipe)Center(child: const Text("Recipe Post.", style: TextStyle(color:  Color.fromRGBO(99,122,159, 1), fontSize: 35))),
-          if(_isCommunityPost)Center(child: const Text("Event Post.", style: TextStyle(color:  Color.fromRGBO(99,122,159, 1), fontSize: 35))),
+          if(_isRecipe)Center(child: const Text("Recipe Post.", style: TextStyle(color: Colors.black54, fontSize: 35))),
+          if(_isCommunityPost)Center(child: const Text("Event Post.", style: TextStyle(color: Colors.black54, fontSize: 35))),
           //const Text("Title:", style: TextStyle(color: Colors.black54, fontSize: 25)),
           TextFormField(
             key: Key("Title"),
@@ -181,8 +182,8 @@ class _CreatePostPageState extends State<CreatePostPage> {
               key: Key("SavePost"),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(200, 50),
-                backgroundColor: Color.fromRGBO(99,122,159, 1),
-                foregroundColor: Colors.white,
+                backgroundColor: Color.fromRGBO(253,220,198,1),
+                foregroundColor: Colors.black,
               ),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
