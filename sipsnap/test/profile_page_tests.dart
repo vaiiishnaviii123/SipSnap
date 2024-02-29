@@ -1,48 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/user_model.dart';
 import 'package:sipsnap/view/profile_views/profile_page.dart';
 import 'package:sipsnap/view_model/user_provider.dart';
 
-import 'profile_page_tests.mocks.dart';
+// Generate a mock class for UserProvider
+class MockUserProvider extends Mock implements UserProvider {}
 
-@GenerateMocks([UserProvider])
 void main() {
-  group('profile page tests', () {
-    testWidgets('Profile Page Widget renders correctly',
-            (WidgetTester tester) async {
-          UserProvider provider = new MockUserProvider();
-          UserModal userModal = UserModal(
-            uuid: 'dgfjdjfj3456342354',
-            email: 'admin@admin.com',
-            name: 'Admin',
-            photoUrl: '',
-          );
-          when(
-              provider.currentUser
-          ).thenAnswer((_) => userModal);
+  testWidgets('ProfilePage displays user profile information', (WidgetTester tester) async {
+    // Create a mock instance of UserProvider
+    var userProvider = MockUserProvider();
 
-          await tester.pumpWidget(
-              MultiProvider(
-                providers: [
-                  ChangeNotifierProvider(create: (context)=>provider)
-                ],
-                child: MaterialApp(
-                  home: Material(
-                    child: ProfilePage(),
-                  ),
-                ),
-              )
-          );
-          await tester.pump();
-          expect(find.textContaining('Name'), findsOneWidget);
-          expect(find.textContaining('Email'), findsOneWidget);
-          expect(find.textContaining('Profile Page'), findsOneWidget);
-          expect(find.textContaining('admin@admin.com'), findsOneWidget);
-          expect(find.textContaining('Admin'), findsOneWidget);
-    });
+    // Provide mock data for currentUser
+    when(userProvider.currentUser).thenReturn(UserModal(
+      name: 'John Doe',
+      email: 'john@example.com',
+      photoUrl: 'https://example.com/avatar.jpg',
+    ));
+
+    // Build the ProfilePage widget within a test environment
+    await tester.pumpWidget(
+      Provider<UserProvider>.value(
+        value: userProvider,
+        child: const MaterialApp(
+          home: ProfilePage(),
+        ),
+      ),
+    );
+
+    // Verify the presence of user profile information
+    expect(find.text('John Doe'), findsOneWidget); // Verify name
+    expect(find.text('john@example.com'), findsOneWidget); // Verify email
+    expect(find.byType(Image), findsOneWidget); // Verify presence of Image widget
   });
 }
