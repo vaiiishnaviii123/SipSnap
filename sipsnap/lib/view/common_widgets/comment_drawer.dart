@@ -37,7 +37,7 @@ class _CommentDrawerState extends State<CommentDrawer> {
                     itemCount: commentProvider.comments.length,
                     itemBuilder: (context, index) {
                       Color cardColor =
-                          index % 2 == 0 ? Colors.blue[50]! : Colors.blue[100]!;
+                          index % 2 == 0 ? Color.fromRGBO(253,220,198, 1) : Color.fromRGBO(250, 238, 230,1);
                       return Card(
                         color: cardColor,
                         child: ListTile(

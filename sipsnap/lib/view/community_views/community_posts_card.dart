@@ -32,14 +32,10 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(Icons.account_circle, color: Colors.blueGrey, size: 40),
-              const SizedBox(height: 8.0),
-              const SizedBox(width: 8.0),
-              Text(widget.post.username!),
-            ],
-          ),
+              Padding(
+                  padding: EdgeInsets.only(left: 16.0, top: 16.0),
+                  child: Text(widget.post.username!, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
+              ),
           // 1. Photo of the post
           if(widget.post.imageRef.isNotEmpty)Container(
               height: 200.0, // Adjust the height as needed

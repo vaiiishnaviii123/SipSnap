@@ -17,6 +17,7 @@ class RecipePostsPage extends StatelessWidget {
     });
 
     return Scaffold(
+      backgroundColor:  Color.fromRGBO(250, 238, 230,1),
       body: Consumer<RecipePostsProvider>(
         builder: (context, recipePostsProvider, _) {
           return ListView.builder(
