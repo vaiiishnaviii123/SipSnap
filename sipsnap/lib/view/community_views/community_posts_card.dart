@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sipsnap/models/community_posts_model.dart';
-import 'package:sipsnap/view/common_widgets/comment_drawer.dart';
-import '../../view_model/comment_provider.dart';
 
 class CommunityPostCard extends StatefulWidget {
   final CommunityPost post;
@@ -17,41 +15,37 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
   int likeCount = 0;
   bool isLiked = false;
 
-  void _submitComment(String comment) {
-    // Here you can handle the submitted comment, for example, send it to a server or store it locally.
-    print('Submitted comment: $comment');
-    // You might also want to update the UI accordingly.
-  }
-
   @override
   Widget build(BuildContext context) {
-
     return Card(
       key: const Key("card"),
       margin: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-              Padding(
-                  padding: EdgeInsets.only(left: 16.0, top: 16.0),
-                  child: Text(widget.post.username!, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
-              ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+            child: Text(
+              widget.post.username!,
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+            ),
+          ),
           // 1. Photo of the post
-          if(widget.post.imageRef.isNotEmpty)Container(
+          if (widget.post.imageRef.isNotEmpty)
+            Container(
               height: 200.0, // Adjust the height as needed
               width: double.infinity,
               color: Colors.grey, // Placeholder color
-              child: Image.network(
-                  widget.post.imageRef,
-                  errorBuilder:(BuildContext context, Object exception, StackTrace? stackTrace) {
-                    return Center(
-                        child: Text('😢 No image found.', style: TextStyle(color: Colors.white, fontSize: 20),
-                        )
-                    );
-                  },
-                  fit: BoxFit.cover,
-                  width: double.infinity),
-          ),
+              child: Image.network(widget.post.imageRef, errorBuilder:
+                  (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                return const Center(
+                    child: Text(
+                  '😢 No image found.',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ));
+              }, fit: BoxFit.cover, width: double.infinity),
+            ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -67,38 +61,6 @@ class _CommunityPostCardState extends State<CommunityPostCard> {
                 const SizedBox(height: 8.0),
                 // Description
                 Text(widget.post.description),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        isLiked ? Icons.favorite : Icons.favorite_border,
-                        color: isLiked ? Colors.red : null,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isLiked = !isLiked;
-                          likeCount += isLiked ? 1 : -1;
-                        });
-                      },
-                    ),
-                    const SizedBox(width: 4.0),
-                    Text('Likes: $likeCount'),
-                    const SizedBox(width: 16.0),
-                    IconButton(
-                      icon: const Icon(Icons.comment),
-                      onPressed: () {
-                        // Show the comment drawer
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return CommentDrawer(controller: TextEditingController());
-                          },
-                        );
-                      },
-                    ),
-                    Text('Comments: ${ context.read<CommentProvider>().comments.length}'),
-                  ],
-                ),
               ],
             ),
           ),

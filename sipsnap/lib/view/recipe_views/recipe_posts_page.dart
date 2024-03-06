@@ -13,15 +13,15 @@ class RecipePostsPage extends StatelessWidget {
 
     // Fetch community posts when the page is built
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await  context.read<RecipeDatabase>().fetchRecipePosts(recipeProvider);
+      await context.read<RecipeDatabase>().fetchRecipePosts(recipeProvider);
     });
 
     return Scaffold(
-      backgroundColor:  Color.fromRGBO(250, 238, 230,1),
+      backgroundColor: const Color.fromRGBO(250, 238, 230, 1),
       body: Consumer<RecipePostsProvider>(
         builder: (context, recipePostsProvider, _) {
           return ListView.builder(
-            key: ValueKey('list'),
+            key: const ValueKey('list'),
             itemCount: recipePostsProvider.recipePosts.length,
             itemBuilder: (context, index) {
               var post = recipePostsProvider.recipePosts[index];
